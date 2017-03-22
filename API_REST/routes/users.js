@@ -48,7 +48,7 @@ en el Body:
 "nombre": "Usuario de Prueba"
 }
 */
-router.get('/addUsuario', function(request, response) { 
+router.get('/register', function(request, response) { 
     var datosUsuario = formatearUsuario(null, request.query.usuario,request.query.contrasena);
     console.log(datosUsuario);
     usuariosModel.insertUsuario(datosUsuario,function(error, datos)

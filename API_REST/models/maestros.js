@@ -57,7 +57,15 @@ maestros.updateMaestro = function(masterData, callback)
 	
 	if(connection)
 	{
-		var sql = 'UPDATE usuarios SET ' + connection.escape(datosUsuario.contrasena)  +' WHERE usuario_idusuario = ' + datosUsuario.idusuarios;
+		var sql = 'UPDATE usuarios SET nombre=' + connection.escape(masterData.nombre)+
+				' apellido = ' + connection.escape(masterData.apellido) +
+				' rfc = ' + connection.escape(masterData.rfc) + 
+				' cedulaProfesional = ' + connection.escape(masterData.cedulaProfesional) +
+				' gradoMaxEstudios = ' +connection.escape(masterData.gradoMaxEstudios) + 
+				' curp = ' + connection.escape(masterData.curp) +
+				' domicilioParticular = ' + connection.escape(masterData.domicilioParticular) + 
+				' telefono = ' + connection.escape(masterData.telefono) +
+				' WHERE usuario_idusuario = ' + datosUsuario.idusuarios;
 		connection.query(sql, function(error, result) 
 		{
 			if(error)

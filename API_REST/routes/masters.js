@@ -18,7 +18,8 @@ function formatearMaestro(datos){
       curp:datos.curp,
       domicilioParticular:datos.domicilioParticular,
       telefono:datos.telefono,
-      usuario_idusuario:datos.usuario_idusuario};
+      usuario_idusuario:datos.usuario_idusuario
+    };
 }
 
 //Coger maestro por id de usuario
