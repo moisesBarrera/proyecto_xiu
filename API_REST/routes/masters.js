@@ -22,6 +22,14 @@ function formatearMaestro(datos){
     };
 }
 
+
+router.get('/maestros', function(request, response) {  
+   maestrosModel.getmaestros(function(error, data)
+    {
+          response.status(200).json(data);
+    });
+});
+
 //Coger maestro por id de usuario
 router.get('/getMaestro', function(request, response) {  
   var id = request.query.id;
@@ -29,11 +37,11 @@ router.get('/getMaestro', function(request, response) {
       {
         if (!error && datos.length > 0)
         {
-          response.status(200).json(datos);
+          response.status(200).json({"mensaje":true,"Informacion":datos});
         }
         else
         {
-          response.status(404).json({"Mensaje":"No existe "});
+          response.status(404).json({"mensaje":false});
         }
       });
     });
@@ -46,36 +54,21 @@ en el Body:
 ,etc
 }
 */
-router.get('/addMaestro', function(request, response) { 
-    var datosMaestro = formatearMaestro(request.query);
-    console.log(datosMaestro);
-    maestrosModel.insertUsuario(datosMaestro,function(error, datos)
-    {
-      if(datos)
-      {
-        response.status(200).json({"Mensaje":"Insertado"});
-      }
-      else
-      {
-        response.status(500).json({"Mensaje":"Error"});
-      }
-    });
-});
 
 //Modificar un maestro
 router.get('/updateMaestro', function(request, response) {  
     var datosMaestro = formatearMaestro(request.query);
     console.log(datosMaestro);
-    maestrosModel.updateUsuario(datosMaestro,function(error, datos)
+    maestrosModel.updateMaestro(datosMaestro,function(error, datos)
     {
       //si el maestro se ha actualizado correctamente mostramos un mensaje
-      if(datos && datos.mensaje)
+      if(!error)
       {
-        response.status(200).json(datos);
+        response.status(200).json({"mensaje":true});
       }
       else
       {
-        response.status(500).json({"mensaje":"Error"});
+        response.status(500).json({"mensaje":false});
         
       }
     });

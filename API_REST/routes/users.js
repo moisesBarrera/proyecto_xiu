@@ -32,11 +32,11 @@ router.get('/login', function(request, response) {
       {
         if (!error && datos.length > 0)
         {
-          response.status(200).json(datos);
+          response.status(200).json({"mensaje":true, "Informacion":datos});
         }
         else
         {
-          response.status(404).json({"Mensaje":"No existe "});
+          response.status(404).json({"mensaje":false});
         }
       });
     });
@@ -50,16 +50,18 @@ en el Body:
 */
 router.get('/register', function(request, response) { 
     var datosUsuario = formatearUsuario(null, request.query.usuario,request.query.contrasena);
-    console.log(datosUsuario);
+    //console.log(datosUsuario);
     usuariosModel.insertUsuario(datosUsuario,function(error, datos)
     {
-      if(datos)
+      //console.log(datos);
+      //console.log(error);
+      if(!error)
       {
-        response.status(200).json({"Mensaje":"Insertado"});
+        response.status(200).json({"mensaje":true,"id":datos});
       }
       else
       {
-        response.status(500).json({"Mensaje":"Error"});
+        response.status(500).json({"mensaje":false});
       }
     });
 });
@@ -71,13 +73,13 @@ router.get('/updateUsuario', function(request, response) {
     usuariosModel.updateUsuario(datosUsuario,function(error, datos)
     {
       //si el usuario se ha actualizado correctamente mostramos un mensaje
-      if(datos && datos.mensaje)
+      if(!error)
       {
-        response.status(200).json(datos);
+        response.status(200).json({"mensaje":true});
       }
       else
       {
-        response.status(500).json({"mensaje":"Error"});
+        response.status(500).json({"mensaje":false});
         
       }
     });
@@ -89,13 +91,13 @@ router.get('/deleteUsuario', function(request, response) {
 	var id = request.query.id;
     usuariosModel.deleteUsuario(id,function(error, datos)
     {
-      if(datos && datos.mensaje === "Borrado")
+      if(!error)
       {
-        response.status(200).json(datos);
+        response.status(200).json({"mensaje":true});
       }
       else
       {
-        response.status(500).json({"mensaje":"Error"});
+        response.status(500).json({"mensaje":false});
       }
     });
 

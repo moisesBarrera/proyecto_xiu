@@ -10,6 +10,24 @@ connection = mysql.createConnection(
 //Creamos un objeto al que llamaremos usuarios
 var maestros = {};
  
+//Obtenemos todos los maestros
+maestros.getmaestros= function(callback)
+{
+	if (connection) 
+	{
+		connection.query('SELECT * FROM maestros', function(error, rows) {
+			if(error)
+			{
+				callback(true,null);
+			}
+			else
+			{
+				callback(null, rows);
+			}
+		});
+	}
+}
+
 //Obtenemos un maestro por su id
 maestros.getMaestroById = function(id,callback)
 {
@@ -20,7 +38,7 @@ maestros.getMaestroById = function(id,callback)
 		{
 			if(error)
 			{
-				throw error;
+				callback(true,null);
 			}
 			else
 			{
@@ -30,26 +48,6 @@ maestros.getMaestroById = function(id,callback)
 	}
 }
 
-//Añadir un nuevo maestro
-maestros.insertMaestro = function(masterData,callback)
-{
-	if (connection) 
-	{
-		connection.query('INSERT INTO maestros SET ?', masterData, function(error, result) 
-		{
-			if(error)
-			{
-				
-				throw error;
-			}
-			else
-			{
-				//devolvemos el id del usuario insertado
-				callback(null, result.insertId);
-			}
-		});
-	}
-}
  
 //Actualizar un usuario
 maestros.updateMaestro = function(masterData, callback)
@@ -57,20 +55,20 @@ maestros.updateMaestro = function(masterData, callback)
 	
 	if(connection)
 	{
-		var sql = 'UPDATE usuarios SET nombre=' + connection.escape(masterData.nombre)+
-				' apellido = ' + connection.escape(masterData.apellido) +
-				' rfc = ' + connection.escape(masterData.rfc) + 
-				' cedulaProfesional = ' + connection.escape(masterData.cedulaProfesional) +
-				' gradoMaxEstudios = ' +connection.escape(masterData.gradoMaxEstudios) + 
-				' curp = ' + connection.escape(masterData.curp) +
-				' domicilioParticular = ' + connection.escape(masterData.domicilioParticular) + 
-				' telefono = ' + connection.escape(masterData.telefono) +
-				' WHERE usuario_idusuario = ' + datosUsuario.idusuarios;
+		var sql = 'UPDATE maestros SET nombre=' + connection.escape(masterData.nombre)+
+				' ,apellido = ' + connection.escape(masterData.apellido) +
+				' ,rfc = ' + connection.escape(masterData.rfc) + 
+				' ,cedulaProfesional = ' + connection.escape(masterData.cedulaProfesional) +
+				' ,gradoMaxEstudios = ' +connection.escape(masterData.gradoMaxEstudios) + 
+				' ,curp = ' + connection.escape(masterData.curp) +
+				' ,domicilioParticular = ' + connection.escape(masterData.domicilioParticular) + 
+				' ,telefono = ' + connection.escape(masterData.telefono) +
+				' WHERE usuario_idusuario = ' + connection.escape(masterData.usuario_idusuario);
 		connection.query(sql, function(error, result) 
 		{
 			if(error)
 			{
-				throw error;
+				callback(true,null);
 			}
 			else
 			{

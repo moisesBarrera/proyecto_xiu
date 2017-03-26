@@ -18,7 +18,7 @@ usuarios.getUsuarios = function(callback)
 		connection.query('SELECT * FROM usuarios', function(error, rows) {
 			if(error)
 			{
-				throw error;
+				callback(true,null);
 			}
 			else
 			{
@@ -38,7 +38,7 @@ usuarios.getUsuarioById = function(usuario,contrasena,callback)
 		{
 			if(error)
 			{
-				throw error;
+				callback(true,null);
 			}
 			else
 			{
@@ -53,17 +53,19 @@ usuarios.insertUsuario = function(usuarioData,callback)
 {
 	if (connection) 
 	{
-		connection.query('INSERT INTO usuarios SET ?', usuarioData, function(error, result) 
+		var sql = 'CALL REGISTRAR("'+usuarioData.usuario+'","'+usuarioData.contrasena+'")';
+		//console.log(sql +"-------");
+		connection.query(sql, function(error, result) 
 		{
+			//console.log(result[0][0].id);
 			if(error)
 			{
-				
-				throw error;
+				callback(true,null);
 			}
 			else
 			{
 				//devolvemos el id del usuario insertado
-				callback(null, result.insertId);
+				callback(null, result[0][0].id);
 			}
 		});
 	}
@@ -80,7 +82,7 @@ usuarios.updateUsuario = function(datosUsuario, callback)
 		{
 			if(error)
 			{
-				throw error;
+				callback(true,null);
 			}
 			else
 			{
@@ -99,13 +101,13 @@ usuarios.deleteUsuario = function(id, callback)
 		connection.query(sql, function(error, result) 
 			{
 				if(error)
-					{
-						throw error;
-					}
+				{
+					callback(true,null);
+				}
 				else
-					{
-						callback(null,{"mensaje":"Borrado"});
-					}
+				{
+					callback(null,{"mensaje":"Borrado"});
+				}
 			});
 	}
 			
