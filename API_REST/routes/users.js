@@ -7,11 +7,11 @@ var usuariosModel = require('../models/usuarios');
 
 
 //Modelo de usuario
-function formatearUsuario(id=null, usuario=null,contrasena=null){
+function formatearUsuario(datos){
   var datosUsuario = {
-      idusuarios : id,
-      usuario : usuario,
-      contrasena : contrasena
+      idusuarios : datos.idusuarios,
+      usuario : datos.usuario,
+      contrasena : datos.contrasena
     };
 
     return datosUsuario;
@@ -49,7 +49,7 @@ en el Body:
 }
 */
 router.get('/register', function(request, response) { 
-    var datosUsuario = formatearUsuario(null, request.query.usuario,request.query.contrasena);
+    var datosUsuario = formatearUsuario(request.query.usuario);
     //console.log(datosUsuario);
     usuariosModel.insertUsuario(datosUsuario,function(error, datos)
     {

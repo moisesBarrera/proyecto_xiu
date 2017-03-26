@@ -5,6 +5,8 @@ var aplicacion = express();
 var usuarios=require("./routes/users");
 var maestros=require("./routes/masters");
 var escuelas=require("./routes/school");
+var padres=require("./routes/familyGuy");
+var groups=require("./routes/groups");
 router.get('/', function(request, response) {  
    response.status(200).json({"mensaje":"Servidor iniciado"});
 });
@@ -14,6 +16,7 @@ aplicacion.use(router);
 aplicacion.use(usuarios);
 aplicacion.use(maestros);
 aplicacion.use(escuelas);
+aplicacion.use(groups);
  
 
 aplicacion.listen(5000, function() { 
