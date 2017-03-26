@@ -3,7 +3,7 @@ var express = require('express');
 //Creamos el objeto para definir las rutas
 var router = express.Router();
 //Importamos el modelo que ejecutará las sentencias SQL
-var alumnosModel = require('../models/grupos');
+var alumnosModel = require('../models/alumnos');
 
 
 //Modelo de usuario
@@ -75,7 +75,7 @@ router.get('/insertAlumno', function(request, response) {
       //console.log(error);
       if(!error)
       {
-        response.status(200).json({"mensaje":true,"id":datos});
+        response.status(200).json({"mensaje":true});
       }
       else
       {

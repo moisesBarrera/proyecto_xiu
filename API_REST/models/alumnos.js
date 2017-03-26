@@ -74,9 +74,10 @@ Alumnos.insertAlumnos = function(alumnoData,callback)
 	if (connection) 
 	{
 		var sql = 'INSERT INTO Alumnos (nombre, apellido, genero, curp, matricula, usuario_idusuario, observaciones, grupo_idgrupo) VALUES'+
-		'('+alumnoData.nombre+','+alumnoData.apellido+','+alumnoData.genero+','+alumnoData.curp+','+alumnoData.matricula
-		+','+alumnoData.usuario_idusuario+','+alumnoData.observaciones+','+alumnoData.grupo_idgrupo+')';
+		'('+connection.escape(alumnoData.nombre)+','+connection.escape(alumnoData.apellido)+','+connection.escape(alumnoData.genero)+','+connection.escape(alumnoData.curp)+','+connection.escape(alumnoData.matricula)
+		+','+connection.escape(alumnoData.usuario_idusuario)+','+connection.escape(alumnoData.observaciones)+','+connection.escape(alumnoData.grupo_idgrupo)+')';
 		//console.log(sql +"-------");
+		console.log(sql);
 		connection.query(sql, function(error, result) 
 		{
 			//console.log(result[0][0].id);
@@ -87,7 +88,7 @@ Alumnos.insertAlumnos = function(alumnoData,callback)
 			else
 			{
 				//devolvemos el id del usuario insertado
-				callback(null, result[0][0].id);
+				callback(null, true);
 			}
 		});
 	}
