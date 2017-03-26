@@ -3,29 +3,35 @@ var express = require('express');
 //Creamos el objeto para definir las rutas
 var router = express.Router();
 //Importamos el modelo que ejecutará las sentencias SQL
-var gruposModel = require('../models/grupos');
+var alumnosModel = require('../models/grupos');
 
 
 //Modelo de usuario
-function formatearGrupos(datos){
+function formatearAlumnos(datos){
     return {
-      idgrupo : datos.idgrupo,
+      idAlumnos : datos.idAlumnos,
       nombre : datos.nombre,
-      usuarios_idusuarios : datos.usuarios_idusuarios
+      apellido : datos.apellido,
+      genero : datos.genero,
+      curp : datos.curp,
+      matricula : datos.matricula,
+      usuario_idusuario : datos.usuario_idusuario,
+      observaciones : datos.observaciones,
+      grupo_idgrupo : datos.grupo_idgrupo
     };
 }
 
 //Coger todos los grupos
-router.get('/grupos', function(request, response) {  
-   gruposModel.getGrupos(function(error, data)
+router.get('/alumnos', function(request, response) {  
+   alumnosModel.getAlumnos(function(error, data)
     {
           response.status(200).json(data);
     });
 });
 //Coger un grupo por id
-router.get('/gruposById', function(request, response) {  
-  var id = request.query.idgrupo;
-  gruposModel.getGruposById(id,function(error, datos)
+router.get('/alumnoById', function(request, response) {  
+  var id = request.query.idAlumnos;
+  alumnosModel.getAlumnosById(id,function(error, datos)
       {
         if (!error && datos.length > 0)
         {
@@ -39,9 +45,9 @@ router.get('/gruposById', function(request, response) {
     });
 
 //Coger un grupo por usuario
-router.get('/gruposByUser', function(request, response) {  
-  var id = request.query.usuarios_idusuarios;
-  gruposModel.getGruposByUser(id,function(error, datos)
+router.get('/alumnoByGrupo', function(request, response) {  
+  var id = request.query.grupo_idgrupo;
+  alumnosModel.getAlumnosByGrupo(id,function(error, datos)
       {
         if (!error && datos.length > 0)
         {
@@ -61,9 +67,9 @@ en el Body:
 "nombre": "Usuario de Prueba"
 }
 */
-router.get('/insertGrupo', function(request, response) { 
-    var datosgrupo = formatearGrupos(request.query);
-    gruposModel.insertGrupos(datosgrupo,function(error, datos)
+router.get('/insertAlumno', function(request, response) { 
+    var datosAlumno = formatearAlumnos(request.query);
+    alumnosModel.insertAlumnos(datosAlumno,function(error, datos)
     {
       //console.log(datos);
       //console.log(error);
@@ -79,10 +85,9 @@ router.get('/insertGrupo', function(request, response) {
 });
 
 //Modificar un usuario
-router.get('/updateGrupo', function(request, response) {  
-    var datosgrupo = formatearGrupos(request.query);
-    console.log(datosgrupo);
-    gruposModel.updateGrupos(datosgrupo,function(error, datos)
+router.get('/updateAlumno', function(request, response) {  
+    var datosAlumno = formatearAlumnos(request.query);
+    alumnosModel.updateAlumnos(datosAlumno,function(error, datos)
     {
       //si el usuario se ha actualizado correctamente mostramos un mensaje
       if(!error)
@@ -99,9 +104,9 @@ router.get('/updateGrupo', function(request, response) {
 });
 //Borrar un usuario
 
-router.get('/deleteGrupo', function(request, response) {  
+router.get('/deleteAlumno', function(request, response) {  
 	var id = request.query.id;
-    gruposModel.deleteGrupos(id,function(error, datos)
+    alumnosModel.deleteAlumnos(id,function(error, datos)
     {
       if(!error)
       {

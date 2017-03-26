@@ -7,15 +7,15 @@ connection = mysql.createConnection(
 	conn
 );
  
-//Creamos un objeto al que llamaremos grupos
-var grupos = {};
+//Creamos un objeto al que llamaremos Alumnos
+var Alumnos = {};
  
-//Obtenemos todos los grupos
-grupos.getGrupos = function(callback)
+//Obtenemos todos los Alumnos
+Alumnos.getAlumnos = function(callback)
 {
 	if (connection) 
 	{
-		connection.query('SELECT * FROM grupo', function(error, rows) {
+		connection.query('SELECT * FROM Alumnos', function(error, rows) {
 			if(error)
 			{
 				callback(true,null);
@@ -29,11 +29,11 @@ grupos.getGrupos = function(callback)
 }
  
 //Obtenemos un padre de familia por su id
-grupos.getGruposById = function(id,callback)
+Alumnos.getAlumnosById = function(id,callback)
 {
 	if (connection) 
 	{
-		var sql = 'SELECT * FROM grupo WHERE idgrupo = ' + connection.escape(id);
+		var sql = 'SELECT * FROM Alumnos WHERE idAlumnos = ' + connection.escape(id);
 		connection.query(sql, function(error, row) 
 		{
 			if(error)
@@ -49,11 +49,11 @@ grupos.getGruposById = function(id,callback)
 }
 
 //Obtenemos un padre de familia por su usuario
-grupos.getGruposByUser = function(id,callback)
+Alumnos.getAlumnosByGrupo = function(id,callback)
 {
 	if (connection) 
 	{
-		var sql = 'SELECT * FROM grupo WHERE usuarios_idusuarios = ' + connection.escape(id);
+		var sql = 'SELECT * FROM Alumnos WHERE grupo_idgrupo = ' + connection.escape(id);
 		connection.query(sql, function(error, row) 
 		{
 			if(error)
@@ -69,12 +69,13 @@ grupos.getGruposByUser = function(id,callback)
 }
 
 //Añadir un nuevo usuario
-grupos.insertGrupos = function(grupoData,callback)
+Alumnos.insertAlumnos = function(alumnoData,callback)
 {
 	if (connection) 
 	{
-		var sql = 'INSERT INTO grupo (nombre, usuarios_idusuarios) VALUES'+
-		' ('+grupoData.nombre+', '+grupoData.usuarios_idusuarios +')';
+		var sql = 'INSERT INTO Alumnos (nombre, apellido, genero, curp, matricula, usuario_idusuario, observaciones, grupo_idgrupo) VALUES'+
+		'('+alumnoData.nombre+','+alumnoData.apellido+','+alumnoData.genero+','+alumnoData.curp+','+alumnoData.matricula
+		+','+alumnoData.usuario_idusuario+','+alumnoData.observaciones+','+alumnoData.grupo_idgrupo+')';
 		//console.log(sql +"-------");
 		connection.query(sql, function(error, result) 
 		{
@@ -93,13 +94,19 @@ grupos.insertGrupos = function(grupoData,callback)
 }
  
 //Actualizar un usuario
-grupos.updateGrupos = function(grupoData, callback)
+Alumnos.updateAlumnos = function(alumnoData, callback)
 {
 	
 	if(connection)
 	{
-		var sql = 'UPDATE grupo SET nombre=' + connection.escape(grupoData.nombre)
-				' WHERE idgrupo = ' + connection.escape(grupoData.idgrupo);
+		var sql = 'UPDATE Alumnos SET nombre=' + connection.escape(alumnoData.nombre) +
+				' ,apellido = ' + connection.escape(alumnoData.apellido) +
+				' ,genero = ' + connection.escape(alumnoData.genero) +
+				' ,curp = ' + connection.escape(alumnoData.curp) +
+				' ,matricula = ' + connection.escape(alumnoData.matricula) +
+				' ,observaciones = ' + connection.escape(alumnoData.observaciones) +
+				' ,grupo_idgrupo = ' + connection.escape(alumnoData.grupo_idgrupo) +
+				' WHERE idAlumnos = ' + connection.escape(alumnoData.idAlumnos);
 		connection.query(sql, function(error, result) 
 		{
 			if(error)
@@ -115,11 +122,11 @@ grupos.updateGrupos = function(grupoData, callback)
 }
  
 //Eliminar un usuario por su id
-grupos.deleteGrupos = function(id, callback)
+Alumnos.deleteAlumnos = function(id, callback)
 {
 	if(connection)
 	{
-		var sql = 'DELETE FROM grupo WHERE idgrupo = ' + connection.escape(id);
+		var sql = 'DELETE FROM Alumnos WHERE idAlumnos = ' + connection.escape(id);
 		connection.query(sql, function(error, result) 
 			{
 				if(error)
@@ -135,4 +142,4 @@ grupos.deleteGrupos = function(id, callback)
 			
 }
 
-module.exports =grupos;
+module.exports =Alumnos;
