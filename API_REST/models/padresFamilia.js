@@ -73,12 +73,14 @@ padreDeFamilia.insertPadreDeFamilia = function(padreData,callback)
 {
 	if (connection) 
 	{
-		var sql = 'INSERT INTO PadresFamilia (nombre, apellidos, telefono, direccion, email, usuarios_idusuarios) VALUES'+
-		' ('+padreData.nombre+', '+padreData.apellidos+', '+padreData.telefono+', '+padreData.direccion+', '+padreData.email+','+padreData.usuarios_idusuarios +')';
+		var sql = "INSERT INTO PadresFamilia (nombre, apellidos, telefono, direccion, email, usuarios_idusuarios) VALUES"+
+		"('"+padreData.nombre+"', '"+padreData.apellidos+"', '"+padreData.telefono+"', '"+padreData.direccion+"', '"+padreData.email+"','"+padreData.usuarios_idusuarios +"')";
 		//console.log(sql +"-------");
+		//console.log(sql);
 		connection.query(sql, function(error, result) 
 		{
 			//console.log(result[0][0].id);
+			console.log(result);
 			if(error)
 			{
 				callback(true,null);
@@ -86,7 +88,7 @@ padreDeFamilia.insertPadreDeFamilia = function(padreData,callback)
 			else
 			{
 				//devolvemos el id del usuario insertado
-				callback(null, result[0][0].id);
+				callback(null, true);
 			}
 		});
 	}
@@ -102,8 +104,9 @@ padreDeFamilia.updatePadreDeFamilia = function(datosPadres, callback)
 				' ,apellidos = ' + connection.escape(datosPadres.apellidos) +
 				' ,telefono = ' + connection.escape(datosPadres.telefono) +
 				' ,direccion = ' +connection.escape(datosPadres.direccion) + 
-				' ,email = ' + connection.escape(datosPadres.email) 
+				' ,email = ' + connection.escape(datosPadres.email) +
 				' WHERE idPadresFamilia = ' + connection.escape(datosPadres.idPadresFamilia);
+				//console.log(sql);
 		connection.query(sql, function(error, result) 
 		{
 			if(error)

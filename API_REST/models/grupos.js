@@ -74,7 +74,7 @@ grupos.insertGrupos = function(grupoData,callback)
 	if (connection) 
 	{
 		var sql = 'INSERT INTO grupo (nombre, usuarios_idusuarios) VALUES'+
-		' ('+grupoData.nombre+', '+grupoData.usuarios_idusuarios +')';
+		' ('+connection.escape(grupoData.nombre)+', '+connection.escape(grupoData.usuarios_idusuarios) +')';
 		//console.log(sql +"-------");
 		connection.query(sql, function(error, result) 
 		{
@@ -86,7 +86,7 @@ grupos.insertGrupos = function(grupoData,callback)
 			else
 			{
 				//devolvemos el id del usuario insertado
-				callback(null, result[0][0].id);
+				callback(null, true);
 			}
 		});
 	}
@@ -98,8 +98,9 @@ grupos.updateGrupos = function(grupoData, callback)
 	
 	if(connection)
 	{
-		var sql = 'UPDATE grupo SET nombre=' + connection.escape(grupoData.nombre)
+		var sql = 'UPDATE grupo SET nombre=' + connection.escape(grupoData.nombre) +
 				' WHERE idgrupo = ' + connection.escape(grupoData.idgrupo);
+				//console.log(sql);
 		connection.query(sql, function(error, result) 
 		{
 			if(error)
@@ -108,7 +109,7 @@ grupos.updateGrupos = function(grupoData, callback)
 			}
 			else
 			{
-				callback(null,{"mensaje":"Actualizado"});
+				callback(null,true);
 			}
 		});
 	}
@@ -128,7 +129,7 @@ grupos.deleteGrupos = function(id, callback)
 				}
 				else
 				{
-					callback(null,{"mensaje":"Borrado"});
+					callback(null,true);
 				}
 			});
 	}

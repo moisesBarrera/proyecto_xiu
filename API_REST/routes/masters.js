@@ -58,7 +58,7 @@ en el Body:
 //Modificar un maestro
 router.get('/updateMaestro', function(request, response) {  
     var datosMaestro = formatearMaestro(request.query);
-    console.log(datosMaestro);
+    //console.log(datosMaestro);
     maestrosModel.updateMaestro(datosMaestro,function(error, datos)
     {
       //si el maestro se ha actualizado correctamente mostramos un mensaje

@@ -69,7 +69,7 @@ router.get('/insertGrupo', function(request, response) {
       //console.log(error);
       if(!error)
       {
-        response.status(200).json({"mensaje":true,"id":datos});
+        response.status(200).json({"mensaje":true});
       }
       else
       {
@@ -81,7 +81,7 @@ router.get('/insertGrupo', function(request, response) {
 //Modificar un usuario
 router.get('/updateGrupo', function(request, response) {  
     var datosgrupo = formatearGrupos(request.query);
-    console.log(datosgrupo);
+    //console.log(datosgrupo);
     gruposModel.updateGrupos(datosgrupo,function(error, datos)
     {
       //si el usuario se ha actualizado correctamente mostramos un mensaje

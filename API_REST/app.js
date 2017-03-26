@@ -17,6 +17,7 @@ aplicacion.use(router);
 aplicacion.use(usuarios);
 aplicacion.use(maestros);
 aplicacion.use(escuelas);
+aplicacion.use(padres);
 aplicacion.use(groups);
 aplicacion.use(students);
  

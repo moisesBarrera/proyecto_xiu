@@ -49,7 +49,7 @@ en el Body:
 }
 */
 router.get('/register', function(request, response) { 
-    var datosUsuario = formatearUsuario(request.query.usuario);
+    var datosUsuario = formatearUsuario(request.query);
     //console.log(datosUsuario);
     usuariosModel.insertUsuario(datosUsuario,function(error, datos)
     {
@@ -68,7 +68,7 @@ router.get('/register', function(request, response) {
 
 //Modificar un usuario
 router.get('/updateUsuario', function(request, response) {  
-    var datosUsuario = formatearUsuario(request.query.id,null,request.query.contrasena);
+    var datosUsuario = formatearUsuario(request.query);
     console.log(datosUsuario);
     usuariosModel.updateUsuario(datosUsuario,function(error, datos)
     {

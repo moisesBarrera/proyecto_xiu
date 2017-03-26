@@ -64,6 +64,7 @@ maestros.updateMaestro = function(masterData, callback)
 				' ,domicilioParticular = ' + connection.escape(masterData.domicilioParticular) + 
 				' ,telefono = ' + connection.escape(masterData.telefono) +
 				' WHERE usuario_idusuario = ' + connection.escape(masterData.usuario_idusuario);
+				console.log(sql);
 		connection.query(sql, function(error, result) 
 		{
 			if(error)

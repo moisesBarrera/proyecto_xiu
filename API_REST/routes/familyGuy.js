@@ -67,13 +67,13 @@ en el Body:
 router.get('/insertFamilyGuy', function(request, response) { 
     var datosPadre = formatearPadresFamilia(request.query);
     //console.log(datosUsuario);
-    usuariosModel.insertPadreDeFamilia(datosPadre,function(error, datos)
+    padresModel.insertPadreDeFamilia(datosPadre,function(error, datos)
     {
       //console.log(datos);
       //console.log(error);
       if(!error)
       {
-        response.status(200).json({"mensaje":true,"id":datos});
+        response.status(200).json({"mensaje":true});
       }
       else
       {
@@ -86,7 +86,7 @@ router.get('/insertFamilyGuy', function(request, response) {
 router.get('/updateFamilyGuy', function(request, response) {  
     var datosPadre = formatearPadresFamilia(request.query);
     console.log(datosPadre);
-    usuariosModel.updatePadreDeFamilia(datosPadre,function(error, datos)
+    padresModel.updatePadreDeFamilia(datosPadre,function(error, datos)
     {
       //si el usuario se ha actualizado correctamente mostramos un mensaje
       if(!error)
@@ -105,7 +105,7 @@ router.get('/updateFamilyGuy', function(request, response) {
 
 router.get('/deleteFamilyGuy', function(request, response) {  
 	var id = request.query.id;
-    usuariosModel.deletePadreDeFamilia(id,function(error, datos)
+    padresModel.deletePadreDeFamilia(id,function(error, datos)
     {
       if(!error)
       {
