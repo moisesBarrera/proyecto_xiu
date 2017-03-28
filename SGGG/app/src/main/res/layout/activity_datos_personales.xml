@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_datos_personales"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.eisra.sgg.DatosPersonales"
+    android:background="@android:color/holo_orange_light">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:text="Datos Personales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:textColor="@color/color_white"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:text="Esta sección es para su uso personal. Aqui podra tener acceso a sus datos de forma rapida."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:id="@+id/textView20"
+                android:textStyle="normal|bold"
+                android:textSize="16sp"
+                android:textColor="@color/color_white"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+
+
+
+            <EditText
+                android:layout_width="500px"
+                android:layout_height="70px"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_marginTop="30dp"
+                android:id="@+id/editText3"
+                android:background="@color/color_white"
+                android:hint="Nombre"
+                android:layout_below="@+id/textView4"
+                android:layout_centerHorizontal="true" />
+            <TextView
+                android:text="Nombres(s)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:textStyle="normal|bold"
+                android:textColor="@color/color_white"
+                android:textSize="15sp"
+                android:layout_below="@+id/editText3"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:layout_width="500px"
+                android:layout_height="70px"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_marginTop="11dp"
+                android:id="@+id/editText4"
+                android:background="@color/color_white"
+                android:hint="Apellidos"
+                android:layout_below="@+id/textView"
+                android:layout_alignStart="@+id/editText3" />
+            <TextView
+                android:text="Apellidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:textStyle="normal|bold"
+                android:textColor="@color/color_white"
+                android:textSize="15sp"
+                android:layout_below="@+id/editText4"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:layout_width="500px"
+                android:layout_height="70px"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editText7"
+                android:background="@color/color_white"
+                android:hint="RFC"
+                android:layout_marginTop="11dp"
+                android:layout_below="@+id/textView2"
+                android:layout_alignStart="@+id/editText4" />
+
+            <TextView
+                android:text="RFC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                android:textStyle="normal|bold"
+                android:textColor="@color/color_white"
+                android:textSize="15sp"
+                android:layout_below="@+id/editText7"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:layout_width="500px"
+                android:layout_height="70px"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editText8"
+                android:background="@color/color_white"
+                android:hint="Cedula Profesional"
+                android:layout_marginTop="12dp"
+                android:layout_below="@+id/textView5"
+                android:layout_alignStart="@+id/editText7" />
+
+            <TextView
+                android:text="Cedula Profesional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView7"
+                android:textStyle="normal|bold"
+                android:textColor="@color/color_white"
+                android:textSize="15sp"
+                android:layout_below="@+id/editText8"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:layout_width="500px"
+                android:layout_height="70px"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editText9"
+                android:background="@color/color_white"
+                android:hint="CURP"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/textView7"
+                android:layout_alignStart="@+id/editText8" />
+
+            <TextView
+                android:text="CURP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8"
+                android:textStyle="normal|bold"
+                android:textColor="@color/color_white"
+                android:textSize="15sp"
+                android:layout_below="@+id/editText9"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:layout_width="500px"
+                android:layout_height="70px"
+                android:inputType="number"
+                android:ems="10"
+                android:layout_marginTop="13dp"
+                android:id="@+id/editText10"
+                android:layout_below="@+id/textView8"
+                android:layout_alignStart="@+id/editText9"
+                android:background="@color/color_white"
+                android:hint="Numero de Telefono" />
+
+            <TextView
+                android:text="Número de Telefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView9"
+                android:textStyle="normal|bold"
+                android:textColor="@color/color_white"
+                android:textSize="15sp"
+                android:layout_below="@+id/editText10"
+                android:layout_alignEnd="@+id/textView4" />
+
+            <Spinner
+                android:id="@+id/spEstudios"
+                android:layout_width="500px"
+                android:layout_height="70px"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:entries="@array/Lista"
+                android:background="@color/color_white"/>
+            <TextView
+                android:text="Nivel máximo de estudios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtestudios"
+                android:textStyle="normal|bold"
+                android:textColor="@color/color_white"
+                android:textSize="15sp"
+                android:layout_below="@+id/editText10"
+                android:layout_alignEnd="@+id/textView4" />
+
+            <Button
+                android:text="Guardar Información"
+                android:layout_width="300px"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:id="@+id/button"
+                android:background="@color/colorAccent"
+                android:backgroundTint="@color/colorAccent"
+                android:theme="@style/TemaBoton"
+                android:textSize="18sp"
+                android:layout_height="100px" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
+
+
+
+
