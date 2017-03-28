@@ -1,18 +1,16 @@
 package com.example.eisra.sgg;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class Tareas extends AppCompatActivity {
+public class MenuPadres extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tareas);
+        setContentView(R.layout.activity_menu_padres);
     }
 
-    public void CrearTarea(View v){
-
-    }
 }

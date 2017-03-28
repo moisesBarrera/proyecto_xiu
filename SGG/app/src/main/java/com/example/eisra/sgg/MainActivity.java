@@ -51,11 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void abrirRegistro(View v)
-    {
-        Intent i= new Intent(this, Registro.class);
-        startActivity(i);
-    }
 
     private class ConsultarDatos extends AsyncTask<String, Void, String> {
         @Override

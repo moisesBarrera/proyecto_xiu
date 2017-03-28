@@ -32,6 +32,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:onClick="Info"
         android:background="@color/colorAccent" />
 
     <Button
@@ -43,6 +44,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="7dp"
         android:layout_alignParentEnd="true"
+        android:onClick="Grupos"
         android:background="@color/colorAccent" />
     <Button
         android:text="Padres de familia"
@@ -52,6 +54,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="7dp"
+        android:onClick="Padres"
         android:layout_alignParentEnd="true"
         android:background="@color/colorAccent" />
 

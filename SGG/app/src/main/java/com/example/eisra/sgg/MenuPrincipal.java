@@ -3,6 +3,7 @@ package com.example.eisra.sgg;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class MenuPrincipal extends AppCompatActivity {
@@ -23,21 +24,21 @@ public class MenuPrincipal extends AppCompatActivity {
     }
 
 
-    public void Grupos()
+    public void Grupos(View v)
     {
         Intent i= new Intent(this, MenuGrupos.class);
         startActivity(i);
     }
 
-    public void Padres()
+    public void Padres(View v)
     {
-        Intent i= new Intent(this, Registro.class);
+        Intent i= new Intent(this, MenuPadres.class);
         startActivity(i);
     }
 
-    public void Info()
+    public void Info(View v)
     {
-        Intent i= new Intent(this, Registro.class);
+        Intent i= new Intent(this, MenuInfo.class);
         startActivity(i);
     }
 
