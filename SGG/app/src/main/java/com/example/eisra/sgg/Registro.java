@@ -24,7 +24,7 @@ public class Registro extends AppCompatActivity {
 
     public TextView usuario,contraseña;
     private Button boton;
-    public String ip="192.168.1.68";
+    public String ip="192.168.1.68:5000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,11 @@ public class Registro extends AppCompatActivity {
             public void onClick(View v) {
                 //  if(nombre.getText().toString().trim()==null && cct.getText().toString().trim()==null & zona.getText().toString().trim()==null && direccion.getText().toString().trim()==null)
 
+<<<<<<< HEAD
                 new CargarDatos().execute("http://"+ip+":5000/register?usuario=" + usuario.getText().toString()+"&contrasena="+contraseña.getText().toString());
+=======
+                new CargarDatos().execute("http://"+ip+"/register?usuario=" + usuario.getText().toString()+"&contrasena="+contraseña.getText().toString());
+>>>>>>> origin/master
             }
         });
 
@@ -71,6 +75,7 @@ public class Registro extends AppCompatActivity {
 
     private String downloadUrl(String myurl) throws IOException {
         Log.i("URL",""+myurl);
+        System.out.println(myurl);
         myurl = myurl.replace(" ","%20");
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
@@ -87,6 +92,7 @@ public class Registro extends AppCompatActivity {
             // Starts the query
             conn.connect();
             int response = conn.getResponseCode();
+            System.out.println("la respuesta es "+response);
             Log.d("respuesta", "The response is: " + response);
             is = conn.getInputStream();
 
