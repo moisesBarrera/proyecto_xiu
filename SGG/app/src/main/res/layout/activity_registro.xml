@@ -22,17 +22,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:text="Registrar"
-        android:id="@+id/button3"
-        android:theme="@style/TemaBoton"
-        android:layout_marginTop="81dp"
-        android:layout_width="300px"
-        android:layout_below="@+id/editText6"
-        android:layout_centerHorizontal="true"
-        android:layout_height="120px"
-        android:textSize="18sp" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="70px"
@@ -60,5 +49,16 @@
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:textSize="20sp" />
+
+    <Button
+        android:text="Registrar"
+        android:id="@+id/button3"
+        android:theme="@style/TemaBoton"
+        android:layout_marginTop="89dp"
+        android:layout_width="300px"
+        android:layout_height="120px"
+        android:textSize="18sp"
+        android:layout_below="@+id/editText6"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

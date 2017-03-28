@@ -14,6 +14,7 @@
         <item>Femenino</item>
     </string-array>
     <string name="title_activity_tareas_de__grupos">Tareas_de_Grupos</string>
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
 </resources>
 
 

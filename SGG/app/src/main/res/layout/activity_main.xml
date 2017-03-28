@@ -10,64 +10,64 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.eisra.sgg.MainActivity"
-    android:background="@android:color/holo_orange_light">
-
-    <ImageView
-        android:layout_width="500px"
-        android:layout_height="300px"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:id="@+id/imageView"
-        android:layout_marginTop="37dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    android:background="#ededed"
+    android:theme="@style/AppTheme.NoActionBar">
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="70px"
+        android:layout_height="50dp"
         android:inputType="textPersonName"
         android:ems="10"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="12dp"
         android:id="@+id/editText"
         android:hint="Usuario"
         android:background="@android:color/background_light" />
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="70px"
+        android:layout_height="50dp"
         android:inputType="textPassword"
         android:ems="10"
         android:layout_below="@+id/editText"
         android:layout_alignEnd="@+id/editText"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="11dp"
         android:id="@+id/editText2"
         android:hint="Contraseña"
         android:background="@android:color/background_light" />
 
-    <Button
-        android:text="Ingresar"
-        android:layout_width="300px"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
-        android:id="@+id/button"
-        android:background="@color/colorAccent"
-        android:backgroundTint="@color/colorAccent"
-        android:theme="@style/TemaBoton"
-        android:textSize="18sp"
-        android:layout_height="100px" />
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/logos"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrarse"
         android:id="@+id/textView13"
-        android:layout_marginBottom="11dp"
         android:onClick="abrirRegistro"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="18sp"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:text="Ingresar"
+        android:layout_width="300dp"
+        android:id="@+id/button"
+        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
+        android:theme="@style/TemaBoton"
+        android:textSize="18sp"
+        android:layout_height="100px"
+        android:layout_above="@+id/textView13"
         android:layout_centerHorizontal="true" />
 
 

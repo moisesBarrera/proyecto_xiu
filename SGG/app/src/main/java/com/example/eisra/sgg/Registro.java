@@ -40,7 +40,7 @@ public class Registro extends AppCompatActivity {
             public void onClick(View v) {
                 //  if(nombre.getText().toString().trim()==null && cct.getText().toString().trim()==null & zona.getText().toString().trim()==null && direccion.getText().toString().trim()==null)
 
-                new CargarDatos().execute("http://"+ip+"/android/register?usuario=" + usuario.getText().toString()+"&contrasena="+contraseña.getText().toString());
+                new CargarDatos().execute("http://"+ip+":5000/register?usuario=" + usuario.getText().toString()+"&contrasena="+contraseña.getText().toString());
             }
         });
 
