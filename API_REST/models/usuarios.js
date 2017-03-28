@@ -86,7 +86,7 @@ usuarios.updateUsuario = function(datosUsuario, callback)
 			}
 			else
 			{
-				callback(null,{"mensaje":"Actualizado"});
+				callback(null,true);
 			}
 		});
 	}
@@ -106,7 +106,7 @@ usuarios.deleteUsuario = function(id, callback)
 				}
 				else
 				{
-					callback(null,{"mensaje":"Borrado"});
+					callback(null,true);
 				}
 			});
 	}

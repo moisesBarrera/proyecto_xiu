@@ -8,6 +8,8 @@ var escuelas=require("./routes/school");
 var padres=require("./routes/familyGuy");
 var groups=require("./routes/groups");
 var students=require("./routes/students");
+var seating=require("./routes/seating");
+var homework=require("./routes/homework");
 router.get('/', function(request, response) {  
    response.status(200).json({"mensaje":"Servidor iniciado"});
 });
@@ -20,8 +22,10 @@ aplicacion.use(escuelas);
 aplicacion.use(padres);
 aplicacion.use(groups);
 aplicacion.use(students);
+aplicacion.use(seating);
+aplicacion.use(homework);
  
 
 aplicacion.listen(5000, function() { 
-console.log("Servidor iniciado");
+console.log("Servidor iniciado puerto 5000");
 });

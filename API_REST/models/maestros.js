@@ -73,7 +73,7 @@ maestros.updateMaestro = function(masterData, callback)
 			}
 			else
 			{
-				callback(null,{"mensaje":"Actualizado"});
+				callback(null,true);
 			}
 		});
 	}

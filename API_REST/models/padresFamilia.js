@@ -115,7 +115,7 @@ padreDeFamilia.updatePadreDeFamilia = function(datosPadres, callback)
 			}
 			else
 			{
-				callback(null,{"mensaje":"Actualizado"});
+				callback(null,true);
 			}
 		});
 	}
@@ -135,7 +135,7 @@ padreDeFamilia.deletePadreDeFamilia = function(id, callback)
 				}
 				else
 				{
-					callback(null,{"mensaje":"Borrado"});
+					callback(null,true);
 				}
 			});
 	}
