@@ -70,7 +70,7 @@ escuelas.updateEscuela = function(datosEscuela, callback)
 			}
 			else
 			{
-				callback(null,{"mensaje":"Actualizado"});
+				callback(null,true);
 			}
 		});
 	}

@@ -73,8 +73,7 @@ Alumnos.insertAlumnos = function(alumnoData,callback)
 {
 	if (connection) 
 	{
-		var sql = 'INSERT INTO Alumnos (nombre, apellido, genero, curp, matricula, usuario_idusuario, observaciones, grupo_idgrupo) VALUES'+
-		'('+connection.escape(alumnoData.nombre)+','+connection.escape(alumnoData.apellido)+','+connection.escape(alumnoData.genero)+','+connection.escape(alumnoData.curp)+','+connection.escape(alumnoData.matricula)
+		var sql = 'Call new_Student('+connection.escape(alumnoData.nombre)+','+connection.escape(alumnoData.apellido)+','+connection.escape(alumnoData.genero)+','+connection.escape(alumnoData.curp)+','+connection.escape(alumnoData.matricula)
 		+','+connection.escape(alumnoData.usuario_idusuario)+','+connection.escape(alumnoData.observaciones)+','+connection.escape(alumnoData.grupo_idgrupo)+')';
 		//console.log(sql +"-------");
 		console.log(sql);
@@ -116,7 +115,7 @@ Alumnos.updateAlumnos = function(alumnoData, callback)
 			}
 			else
 			{
-				callback(null,{"mensaje":"Actualizado"});
+				callback(null,true);
 			}
 		});
 	}
@@ -136,7 +135,7 @@ Alumnos.deleteAlumnos = function(id, callback)
 				}
 				else
 				{
-					callback(null,{"mensaje":"Borrado"});
+					callback(null,true);
 				}
 			});
 	}
