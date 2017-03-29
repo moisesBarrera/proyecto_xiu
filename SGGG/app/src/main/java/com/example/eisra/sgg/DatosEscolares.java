@@ -139,16 +139,16 @@ public class DatosEscolares extends AppCompatActivity {
         protected void onPostExecute(String result) {
 
             try {
-                System.out.println(result);
+                //System.out.println(result);
                 Gson gson = new Gson();
                 JSONObject obj = new JSONObject(result);
-                System.out.println(obj.getString("Informacion"));
+                //System.out.println(obj.getString("Informacion"));
                 JSONArray j = new JSONArray(obj.getString("Informacion").toString());
-                System.out.println(j.getString(0));
+                //System.out.println(j.getString(0));
                 DatosEscuela frutas = gson.fromJson(j.getString(0).toString(), DatosEscuela.class);
-                System.out.println(frutas.getNombre());
-                System.out.println(frutas.getTurno());
-                System.out.println(frutas);
+                //System.out.println(frutas.getNombre());
+                //System.out.println(frutas.getTurno());
+                //System.out.println(frutas);
 
             } catch (Exception e) {
                 e.printStackTrace();
