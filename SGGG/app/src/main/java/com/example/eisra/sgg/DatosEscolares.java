@@ -34,6 +34,7 @@ public class DatosEscolares extends AppCompatActivity {
     private Spinner turno;
     private Button boton;
     public String ip="192.168.1.68:5000";
+    DatosEscuela frutas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,7 +146,7 @@ public class DatosEscolares extends AppCompatActivity {
                 //System.out.println(obj.getString("Informacion"));
                 JSONArray j = new JSONArray(obj.getString("Informacion").toString());
                 //System.out.println(j.getString(0));
-                DatosEscuela frutas = gson.fromJson(j.getString(0).toString(), DatosEscuela.class);
+                frutas = gson.fromJson(j.getString(0).toString(), DatosEscuela.class);
                 //System.out.println(frutas.getNombre());
                 //System.out.println(frutas.getTurno());
                 //System.out.println(frutas);
