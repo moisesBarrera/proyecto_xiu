@@ -27,11 +27,8 @@
         <activity android:name=".Alumnos" />
         <activity android:name=".GestionDeAulas" />
         <activity android:name=".Listas" />
-        <activity android:name=".CreacionDeEquipos" />
         <activity android:name=".Acomodar" />
         <activity android:name=".DatosPersonales" />
-        <activity android:name=".TareasDeEquipos" />
-        <activity android:name=".Equipos" />
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".MenuInfo" />
         <activity android:name=".MenuGrupos" />
