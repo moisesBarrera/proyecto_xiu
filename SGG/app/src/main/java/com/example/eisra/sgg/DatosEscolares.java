@@ -10,6 +10,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -20,6 +22,7 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 
 public class DatosEscolares extends AppCompatActivity {
@@ -28,18 +31,73 @@ public class DatosEscolares extends AppCompatActivity {
     private Spinner turno;
     private Button boton;
 public String ip="192.168.1.68";
+
+    public class Escuela
+    {
+        private String nombre;
+        private String cct;
+        private String sector;
+        private String zona;
+        private String direccion;
+        private int turno;
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public String getCct() {
+            return cct;
+        }
+
+        public void setCct(String cct) {
+            this.cct = cct;
+        }
+
+        public String getSector() {
+            return sector;
+        }
+
+        public void setSector(String sector) {
+            this.sector = sector;
+        }
+
+        public String getZona() {
+            return zona;
+        }
+
+        public void setZona(String zona) {
+            this.zona = zona;
+        }
+
+        public String getDireccion() {
+            return direccion;
+        }
+
+        public void setDireccion(String direccion) {
+            this.direccion = direccion;
+        }
+
+        public int getTurno() {
+            return turno;
+        }
+
+        public void setTurno(int turno) {
+            this.turno = turno;
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_escolares);
-       // new ConsultarDatos().execute("http://"+ip+"/android/consulta.php?codigo=" + codigo.getText().toString());
-
-
-        nombre=(TextView) findViewById(R.id.textView3);
-        cct=(TextView) findViewById(R.id.textView4);
-        sector=(TextView) findViewById(R.id.textView7);
-        zona=(TextView) findViewById(R.id.textView8);
-        direccion=(TextView) findViewById(R.id.textView9);
+        nombre=(TextView) findViewById(R.id.editText3);
+        cct=(TextView) findViewById(R.id.editText4);
+        sector=(TextView) findViewById(R.id.editText7);
+        zona=(TextView) findViewById(R.id.editText8);
+        direccion=(TextView) findViewById(R.id.editText9);
         turno=(Spinner) findViewById(R.id.spTurno);
         boton =(Button) findViewById(R.id.button);
 
@@ -48,10 +106,12 @@ public String ip="192.168.1.68";
             public void onClick(View v) {
               //  if(nombre.getText().toString().trim()==null && cct.getText().toString().trim()==null & zona.getText().toString().trim()==null && direccion.getText().toString().trim()==null)
 
-              //  new CargarDatos().execute("http://"+ip+"/android/registro.php?nombre=" + nombre.getText().toString()+"&direccion="+direccion.getText().toString()+"&telefono="+telefono.getText().toString());
+               new CargarDatos().execute("http://"+ip+":5000/updateEscuela?nombre=" + nombre.getText().toString().trim()+"&turno="+turno.getSelectedItemPosition()+"&cct="+cct.getText().toString().trim()+"&sector="+sector.getText().toString().trim()+"&zonaEscolar="+zona.getText().toString().trim()+"&ubicacion="+direccion.getText().toString().trim()+"&usuarios_idusuarios="+MainActivity.idUsuario);
+               // Toast.makeText(getApplicationContext(), turno.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
 
             }
         });
+        new ConsultarDatos().execute("http://" + ip + ":5000/getEscuela?id=" + MainActivity.idUsuario);
 
     }
 
@@ -77,45 +137,8 @@ public String ip="192.168.1.68";
         }
     }
 
-    private class EditarDatos extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
 
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
 
-            Toast.makeText(getApplicationContext(), "Se editaron los datos correctamente", Toast.LENGTH_LONG).show();
-
-        }
-    }
-
-    private class EliminarDatos extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-
-            Toast.makeText(getApplicationContext(), "Se eliminaron los datos correctamente", Toast.LENGTH_LONG).show();
-
-        }
-    }
 
     private class ConsultarDatos extends AsyncTask<String, Void, String> {
         @Override
@@ -132,12 +155,20 @@ public String ip="192.168.1.68";
         @Override
         protected void onPostExecute(String result) {
 
+            final Gson gson= new Gson();
+            gson.fromJson(result,Escuela.class);
+
             JSONArray ja = null;
             try {
                 ja = new JSONArray(result);
                 nombre.setText(ja.getString(1));
+                if(ja.getString(2)=="matutino")turno.setSelection(1);
+                else turno.setSelection(2);
                 direccion.setText(ja.getString(2));
                 cct.setText(ja.getString(3));
+                sector.setText(ja.getString(4));
+                zona.setText(ja.getString(5));
+                direccion.setText(ja.getString(6));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -188,4 +219,7 @@ public String ip="192.168.1.68";
         reader.read(buffer);
         return new String(buffer);
     }
+
+
+
 }

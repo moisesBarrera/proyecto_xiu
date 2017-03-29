@@ -26,6 +26,7 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static int idUsuario=0;
     TextView usuario,contraseña;
     Button boton;
 
@@ -67,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-
             if (result.contains("true")) {
-            iniciar();
+
+                idUsuario=Integer.parseInt(result.substring(45,46));
+                iniciar();
+
             }
             else
             {
