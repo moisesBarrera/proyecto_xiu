@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 new ConsultarDatos().execute("http://192.168.1.68:5000/login?usuario=" + usuario.getText().toString().trim()+"&contrasena="+contraseña.getText().toString().trim()+"");
-
+                System.out.println("http://192.168.1.68:5000/login?usuario=" + usuario.getText().toString().trim()+"&contrasena="+contraseña.getText().toString().trim()+"");
             }});
 
     }
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-
+            System.out.println(result);
             if (result.contains("true")) {
             iniciar();
             }

@@ -10,8 +10,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.eisra.sgg.Modelos.DatosEscuela;
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +24,8 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class DatosEscolares extends AppCompatActivity {
@@ -27,7 +33,7 @@ public class DatosEscolares extends AppCompatActivity {
     private TextView nombre,cct,sector,zona,direccion;
     private Spinner turno;
     private Button boton;
-public String ip="192.168.1.68";
+    public String ip="192.168.1.68:5000";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +54,7 @@ public String ip="192.168.1.68";
             public void onClick(View v) {
               //  if(nombre.getText().toString().trim()==null && cct.getText().toString().trim()==null & zona.getText().toString().trim()==null && direccion.getText().toString().trim()==null)
 
-              //  new CargarDatos().execute("http://"+ip+"/android/registro.php?nombre=" + nombre.getText().toString()+"&direccion="+direccion.getText().toString()+"&telefono="+telefono.getText().toString());
+              new ConsultarDatos().execute("http://"+ip+"/getEscuela?id=1");
 
             }
         });
@@ -132,13 +138,19 @@ public String ip="192.168.1.68";
         @Override
         protected void onPostExecute(String result) {
 
-            JSONArray ja = null;
             try {
-                ja = new JSONArray(result);
-                nombre.setText(ja.getString(1));
-                direccion.setText(ja.getString(2));
-                cct.setText(ja.getString(3));
-            } catch (JSONException e) {
+                System.out.println(result);
+                Gson gson = new Gson();
+                JSONObject obj = new JSONObject(result);
+                System.out.println(obj.getString("Informacion"));
+                JSONArray j = new JSONArray(obj.getString("Informacion").toString());
+                System.out.println(j.getString(0));
+                DatosEscuela frutas = gson.fromJson(j.getString(0).toString(), DatosEscuela.class);
+                System.out.println(frutas.getNombre());
+                System.out.println(frutas.getTurno());
+                System.out.println(frutas);
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
