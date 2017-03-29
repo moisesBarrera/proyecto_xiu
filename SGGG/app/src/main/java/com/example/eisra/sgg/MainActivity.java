@@ -25,7 +25,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static String ip="192.168.1.68:5000";
+    public static int idUsuario=0;
     TextView usuario,contraseña;
     Button boton;
 
@@ -69,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             System.out.println(result);
             if (result.contains("true")) {
-            iniciar();
+                idUsuario=Integer.parseInt(result.substring(45,46));
+                iniciar();
             }
             else
             {

@@ -39,7 +39,7 @@
                 android:text="Esta sección es para su uso personal. Aqui podra tener acceso a sus datos de forma rapida."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/textView20"
                 android:textStyle="normal|bold"
                 android:textSize="16sp"
@@ -51,8 +51,8 @@
 
 
             <EditText
-                android:layout_width="500px"
-                android:layout_height="70px"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:layout_marginTop="30dp"
@@ -73,8 +73,8 @@
                 android:layout_centerHorizontal="true" />
 
             <EditText
-                android:layout_width="500px"
-                android:layout_height="70px"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:layout_marginTop="11dp"
@@ -95,8 +95,8 @@
                 android:layout_centerHorizontal="true" />
 
             <EditText
-                android:layout_width="500px"
-                android:layout_height="70px"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/editText7"
@@ -118,8 +118,8 @@
                 android:layout_centerHorizontal="true" />
 
             <EditText
-                android:layout_width="500px"
-                android:layout_height="70px"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/editText8"
@@ -141,8 +141,8 @@
                 android:layout_centerHorizontal="true" />
 
             <EditText
-                android:layout_width="500px"
-                android:layout_height="70px"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/editText9"
@@ -164,8 +164,32 @@
                 android:layout_centerHorizontal="true" />
 
             <EditText
-                android:layout_width="500px"
-                android:layout_height="70px"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editText11"
+                android:background="@color/color_white"
+                android:hint="Dirección"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/textView7"
+                android:layout_alignStart="@+id/editText8" />
+
+            <TextView
+                android:text="Dirección"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView11"
+                android:textStyle="normal|bold"
+                android:textColor="@color/color_white"
+                android:textSize="15sp"
+                android:layout_below="@+id/editText9"
+                android:layout_centerHorizontal="true" />
+
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="40dp"
                 android:inputType="number"
                 android:ems="10"
                 android:layout_marginTop="13dp"
@@ -188,8 +212,8 @@
 
             <Spinner
                 android:id="@+id/spEstudios"
-                android:layout_width="500px"
-                android:layout_height="70px"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="30dp"
                 android:layout_centerHorizontal="true"
@@ -208,7 +232,7 @@
 
             <Button
                 android:text="Guardar Información"
-                android:layout_width="300px"
+                android:layout_width="200dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
@@ -217,7 +241,7 @@
                 android:backgroundTint="@color/colorAccent"
                 android:theme="@style/TemaBoton"
                 android:textSize="18sp"
-                android:layout_height="100px" />
+                android:layout_height="60dp" />
         </LinearLayout>
     </ScrollView>
 

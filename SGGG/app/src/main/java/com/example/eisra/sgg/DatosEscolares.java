@@ -33,32 +33,24 @@ public class DatosEscolares extends AppCompatActivity {
     private TextView nombre,cct,sector,zona,direccion;
     private Spinner turno;
     private Button boton;
-    public String ip="192.168.1.68:5000";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_escolares);
-       // new ConsultarDatos().execute("http://"+ip+"/android/consulta.php?codigo=" + codigo.getText().toString());
-
-
-        nombre=(TextView) findViewById(R.id.textView3);
-        cct=(TextView) findViewById(R.id.textView4);
-        sector=(TextView) findViewById(R.id.textView7);
-        zona=(TextView) findViewById(R.id.textView8);
-        direccion=(TextView) findViewById(R.id.textView9);
+        nombre=(TextView) findViewById(R.id.editText3);
+        cct=(TextView) findViewById(R.id.editText4);
+        sector=(TextView) findViewById(R.id.editText7);
+        zona=(TextView) findViewById(R.id.editText8);
+        direccion=(TextView) findViewById(R.id.editText9);
         turno=(Spinner) findViewById(R.id.spTurno);
         boton =(Button) findViewById(R.id.button);
-
+        new ConsultarDatos().execute("http://"+MainActivity.ip+"/getEscuela?id="+MainActivity.idUsuario);
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  if(nombre.getText().toString().trim()==null && cct.getText().toString().trim()==null & zona.getText().toString().trim()==null && direccion.getText().toString().trim()==null)
-
-              new ConsultarDatos().execute("http://"+ip+"/getEscuela?id=1");
-
+                new CargarDatos().execute("http://"+MainActivity.ip+"/updateEscuela?nombre=" + nombre.getText().toString().trim()+"&turno="+turno.getSelectedItemPosition()+"&cct="+cct.getText().toString().trim()+"&sector="+sector.getText().toString().trim()+"&zonaEscolar="+zona.getText().toString().trim()+"&ubicacion="+direccion.getText().toString().trim()+"&usuarios_idusuarios="+MainActivity.idUsuario);
             }
         });
-
     }
 
 
@@ -83,45 +75,6 @@ public class DatosEscolares extends AppCompatActivity {
         }
     }
 
-    private class EditarDatos extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-
-            Toast.makeText(getApplicationContext(), "Se editaron los datos correctamente", Toast.LENGTH_LONG).show();
-
-        }
-    }
-
-    private class EliminarDatos extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-
-            Toast.makeText(getApplicationContext(), "Se eliminaron los datos correctamente", Toast.LENGTH_LONG).show();
-
-        }
-    }
 
     private class ConsultarDatos extends AsyncTask<String, Void, String> {
         @Override
@@ -139,16 +92,17 @@ public class DatosEscolares extends AppCompatActivity {
         protected void onPostExecute(String result) {
 
             try {
-                //System.out.println(result);
                 Gson gson = new Gson();
                 JSONObject obj = new JSONObject(result);
-                //System.out.println(obj.getString("Informacion"));
                 JSONArray j = new JSONArray(obj.getString("Informacion").toString());
-                //System.out.println(j.getString(0));
                 DatosEscuela frutas = gson.fromJson(j.getString(0).toString(), DatosEscuela.class);
-                //System.out.println(frutas.getNombre());
-                //System.out.println(frutas.getTurno());
-                //System.out.println(frutas);
+                nombre.setText(frutas.getNombre());
+                cct.setText(frutas.getCct());
+                direccion.setText(frutas.getUbicacion());
+                sector.setText(frutas.getSector());
+                zona.setText(frutas.getZonaEscolar());
+                turno.setSelection(frutas.getTurno());
+
 
             } catch (Exception e) {
                 e.printStackTrace();
