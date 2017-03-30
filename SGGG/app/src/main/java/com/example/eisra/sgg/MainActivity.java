@@ -88,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
         Intent i= new Intent(this, MenuPrincipal.class);
         startActivity(i);
     }
+    public void abrirRegistro(View v)
+    {
+        Intent i= new Intent(this, Registro.class);
+        startActivity(i);
+    }
 
     private String downloadUrl(String myurl) throws IOException {
         Log.i("URL",""+myurl);
