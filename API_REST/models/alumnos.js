@@ -74,7 +74,7 @@ Alumnos.insertAlumnos = function(alumnoData,callback)
 	if (connection) 
 	{
 		var sql = 'Call new_Student('+connection.escape(alumnoData.nombre)+','+connection.escape(alumnoData.apellido)+','+connection.escape(alumnoData.genero)+','+connection.escape(alumnoData.curp)+','+connection.escape(alumnoData.matricula)
-		+','+connection.escape(alumnoData.usuario_idusuario)+','+connection.escape(alumnoData.observaciones)+','+connection.escape(alumnoData.grupo_idgrupo)+')';
+		+','+connection.escape(alumnoData.usuario_idusuario)+','+connection.escape(alumnoData.observaciones)+','+connection.escape(alumnoData.grupo_idgrupo)+','+connection.escape(alumnoData.idPadre)+')';
 		//console.log(sql +"-------");
 		console.log(sql);
 		connection.query(sql, function(error, result) 
@@ -92,7 +92,30 @@ Alumnos.insertAlumnos = function(alumnoData,callback)
 		});
 	}
 }
- 
+
+Alumnos.getFather =  function(id,callback){
+
+	if (connection) 
+	{
+		var sql = "SELECT * FROM PadresFamilia "+
+			"INNER JOIN Alumnos_has_PadresFamilia "+
+			"ON PadresFamilia.idPadresFamilia = Alumnos_has_PadresFamilia.PadresFamilia_idPadresFamilia "+
+		'WHERE Alumnos_has_PadresFamilia.Alumnos_idAlumnos = ' + connection.escape(id); 
+    				console.log(sql);
+		connection.query(sql, function(error, row) 
+		{
+			if(error)
+			{
+				callback(true,null);
+			}
+			else
+			{
+				callback(null, row);
+			}
+		});
+	}
+}
+
 //Actualizar un usuario
 Alumnos.updateAlumnos = function(alumnoData, callback)
 {

@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.eisra.sgg.Grupos">
+    tools:context="com.example.eisra.sgg.Grupos"
+    android:background="@android:color/holo_orange_light">
 
 </RelativeLayout>
