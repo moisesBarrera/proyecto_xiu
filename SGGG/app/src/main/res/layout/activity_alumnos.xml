@@ -17,12 +17,16 @@ android:background="@android:color/holo_orange_light">
     android:layout_height="match_parent"
     android:layout_alignParentTop="true"
     android:layout_alignParentStart="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="36dp">
 
         <TextView
             android:text="Datos del alumno"
@@ -38,8 +42,8 @@ android:background="@android:color/holo_orange_light">
 
 
         <EditText
-            android:layout_width="500px"
-            android:layout_height="70px"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:inputType="textPersonName"
             android:ems="10"
             android:layout_marginTop="30dp"
@@ -60,8 +64,8 @@ android:background="@android:color/holo_orange_light">
             android:layout_centerHorizontal="true" />
 
         <EditText
-            android:layout_width="500px"
-            android:layout_height="70px"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:inputType="textPersonName"
             android:ems="10"
             android:layout_marginTop="11dp"
@@ -83,8 +87,8 @@ android:background="@android:color/holo_orange_light">
 
 
         <EditText
-            android:layout_width="500px"
-            android:layout_height="70px"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/editText9"
@@ -106,8 +110,8 @@ android:background="@android:color/holo_orange_light">
             android:layout_centerHorizontal="true" />
 
         <EditText
-            android:layout_width="500px"
-            android:layout_height="70px"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/editText7"
@@ -131,8 +135,8 @@ android:background="@android:color/holo_orange_light">
 
         <Spinner
             android:id="@+id/spGenero"
-            android:layout_width="500px"
-            android:layout_height="70px"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
@@ -150,8 +154,8 @@ android:background="@android:color/holo_orange_light">
             android:layout_alignEnd="@+id/textView4" />
 
         <EditText
-            android:layout_width="500px"
-            android:layout_height="200px"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
             android:inputType="textMultiLine"
             android:layout_marginTop="30dp"
             android:ems="10"
@@ -170,7 +174,7 @@ android:background="@android:color/holo_orange_light">
 
         <Button
             android:text="Guardar Información"
-            android:layout_width="300px"
+            android:layout_width="200dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
@@ -179,9 +183,10 @@ android:background="@android:color/holo_orange_light">
             android:backgroundTint="@color/colorAccent"
             android:theme="@style/TemaBoton"
             android:textSize="18sp"
-            android:layout_height="100px" />
+            android:layout_height="60dp" />
+
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
 
 </RelativeLayout>
 

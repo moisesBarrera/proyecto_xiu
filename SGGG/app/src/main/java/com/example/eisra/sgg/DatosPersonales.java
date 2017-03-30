@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.eisra.sgg.Modelos.DatosEscuela;
 import com.example.eisra.sgg.Modelos.DatosMaestro;
 import com.google.gson.Gson;
 
@@ -97,15 +96,15 @@ public class DatosPersonales extends AppCompatActivity {
                 JSONArray j = new JSONArray(obj.getString("Informacion").toString());
                 DatosMaestro frutas = gson.fromJson(j.getString(0).toString(), DatosMaestro.class);
                 nombre.setText(frutas.getNombre());
-                apellidos.setText(frutas.getApellidos());
+                apellidos.setText(frutas.getApellido());
                 rfc.setText(frutas.getRfc());
-                cedula.setText(frutas.getCedula());
+                cedula.setText(frutas.getCedulaProfesional());
                 curp.setText(frutas.getCurp());
-                direccion.setText(frutas.getDireccion());
+                direccion.setText(frutas.getDomicilioParticular());
                 telefono.setText(frutas.getTelefono());
-                if(frutas.getEstudios()=="Licenciatura")estudios.setSelection(0);
-                if(frutas.getEstudios()=="Maestria")estudios.setSelection(1);
-                if(frutas.getEstudios()=="Doctorado")estudios.setSelection(2);
+                if(frutas.getGradoMaxEstudios()=="Licenciatura")estudios.setSelection(0);
+                if(frutas.getGradoMaxEstudios()=="Maestria")estudios.setSelection(1);
+                if(frutas.getGradoMaxEstudios()=="Doctorado")estudios.setSelection(2);
             } catch (Exception e) {
                 e.printStackTrace();
             }
