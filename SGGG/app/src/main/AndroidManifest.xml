@@ -33,7 +33,9 @@
         <activity android:name=".MenuInfo" />
         <activity android:name=".MenuGrupos" />
         <activity android:name=".MenuPadres" />
-        <activity android:name=".Tareas"></activity>
+        <activity android:name=".Tareas" />
+        <activity android:name=".TodosAlumnos" />
+        <activity android:name=".MenuTarea"></activity>
     </application>
 
 </manifest>

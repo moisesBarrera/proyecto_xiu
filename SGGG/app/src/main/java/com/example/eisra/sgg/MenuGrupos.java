@@ -14,9 +14,7 @@ public class MenuGrupos extends AppCompatActivity {
     }
 
     public void VistaTareas(View v){
-
-
-        Intent i= new Intent(this, Tareas.class);
+        Intent i= new Intent(this, MenuTarea.class);
         startActivity(i);
     }
     public void alumnos(View v)

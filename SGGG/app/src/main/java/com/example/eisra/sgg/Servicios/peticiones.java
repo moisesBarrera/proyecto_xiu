@@ -21,6 +21,9 @@ import java.net.URL;
 
 public class peticiones {
 
+    static  public String ip = "192.168.43.231:5000";
+    static  public  int idGrup = 1;
+    static public int idtareagroupEquipo=3;
 
     private class CargarDatos extends AsyncTask<String, Void, String> {
         @Override

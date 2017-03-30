@@ -27,7 +27,7 @@
         android:layout_height="40dp"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText13"
+        android:id="@+id/txt_NomTarea"
         android:background="@android:color/background_light"
         android:hint="Nombre de la Tarea"
         android:layout_marginTop="28dp"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="42dp"
         android:id="@+id/switch_1"
-        android:layout_below="@+id/editText13"
+        android:layout_below="@+id/txt_NomTarea"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -64,17 +64,6 @@
         android:textStyle="normal|bold"
         android:layout_alignTop="@+id/switch_1"
         android:layout_toEndOf="@+id/textView6" />
-
-    <TextView
-        android:text="Individual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView14"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:layout_marginTop="18dp"
-        android:layout_alignParentEnd="true" />
 
     <RelativeLayout
         android:layout_width="400dp"
@@ -110,7 +99,7 @@
 
         <EditText
             android:ems="10"
-            android:id="@+id/editText14"
+            android:id="@+id/txt_NumInte"
             android:layout_height="35dp"
             android:layout_width="70dp"
             android:inputType="number"
@@ -118,37 +107,6 @@
             android:background="@android:color/background_light"
             android:layout_alignBottom="@+id/textView15"
             android:layout_toEndOf="@+id/textView15" />
-
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/switch1"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp" />
-
-        <TextView
-            android:text="Orden de lista"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="31dp"
-            android:id="@+id/textView18"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp"
-            android:textStyle="normal|bold"
-            android:layout_alignBottom="@+id/switch1"
-            android:layout_toStartOf="@+id/switch1" />
-
-        <TextView
-            android:text="Aleatorio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView17"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp"
-            android:textStyle="normal|bold"
-            android:layout_alignBottom="@+id/switch1"
-            android:layout_toEndOf="@+id/textView16" />
 
     </RelativeLayout>
 
