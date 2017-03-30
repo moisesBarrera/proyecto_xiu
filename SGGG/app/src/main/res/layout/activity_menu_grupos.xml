@@ -67,8 +67,6 @@
                 android:layout_alignParentEnd="true"
                 android:background="@color/colorAccent" />
 
-
-
         </LinearLayout>
     </ScrollView>
 

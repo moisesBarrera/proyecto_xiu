@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuGrupos">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +31,7 @@
         <activity android:name=".DatosPersonales" />
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".MenuInfo" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MenuGrupos" />
         <activity android:name=".MenuPadres" />
         <activity android:name=".Tareas"></activity>
     </application>

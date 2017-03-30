@@ -15,11 +15,10 @@ public class MenuGrupos extends AppCompatActivity {
 
     public void VistaTareas(View v){
 
-<<<<<<< HEAD
+
         Intent i= new Intent(this, Tareas.class);
         startActivity(i);
     }
-=======
     public void alumnos(View v)
     {
         Intent hola = new Intent(this,TodosAlumnos.class);
@@ -27,5 +26,4 @@ public class MenuGrupos extends AppCompatActivity {
 
     }
 
->>>>>>> origin/master
 }

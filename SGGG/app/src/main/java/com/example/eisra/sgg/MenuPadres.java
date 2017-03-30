@@ -13,4 +13,11 @@ public class MenuPadres extends AppCompatActivity {
         setContentView(R.layout.activity_menu_padres);
     }
 
+
+
+    public void padres(View v)
+    {
+        Intent i = new Intent(this,PadresDeFamilia.class);
+        startActivity(i);
+    }
 }
