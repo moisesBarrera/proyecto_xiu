@@ -49,6 +49,7 @@ android:background="@android:color/holo_orange_light">
             android:layout_marginTop="30dp"
             android:id="@+id/editText3"
             android:background="@color/color_white"
+            android:paddingLeft="15dp"
             android:hint="Nombre"
             android:layout_below="@+id/textView4"
             android:layout_centerHorizontal="true" />
@@ -68,6 +69,7 @@ android:background="@android:color/holo_orange_light">
             android:layout_height="40dp"
             android:inputType="textPersonName"
             android:ems="10"
+            android:paddingLeft="15dp"
             android:layout_marginTop="11dp"
             android:id="@+id/editText4"
             android:background="@color/color_white"
@@ -95,6 +97,7 @@ android:background="@android:color/holo_orange_light">
             android:background="@color/color_white"
             android:hint="CURP"
             android:layout_marginTop="15dp"
+            android:paddingLeft="15dp"
             android:layout_below="@+id/textView7"
             android:layout_alignStart="@+id/editText8" />
 
@@ -119,6 +122,7 @@ android:background="@android:color/holo_orange_light">
             android:hint="Matrícula"
             android:layout_marginTop="11dp"
             android:layout_below="@+id/textView2"
+            android:paddingLeft="15dp"
             android:layout_alignStart="@+id/editText4" />
 
         <TextView
@@ -137,6 +141,7 @@ android:background="@android:color/holo_orange_light">
             android:id="@+id/spGenero"
             android:layout_width="300dp"
             android:layout_height="40dp"
+            android:paddingLeft="15dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
@@ -160,6 +165,7 @@ android:background="@android:color/holo_orange_light">
             android:layout_marginTop="30dp"
             android:ems="10"
             android:id="@+id/editText11"
+            android:paddingLeft="15dp"
             android:background="@color/color_white" />
         <TextView
             android:text="Observaciones"

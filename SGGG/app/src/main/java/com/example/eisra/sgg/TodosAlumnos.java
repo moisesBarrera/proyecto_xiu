@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.eisra.sgg.Modelos.Alumno;
+
+import java.util.List;
+
 public class TodosAlumnos extends AppCompatActivity {
 
     public String[] lista={"Ernesto Galeana        201400199","Moises Barrera          201400111  "};
