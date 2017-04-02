@@ -11,7 +11,8 @@ function formatearTarea(datos){
     return {
       idtarea : datos.idtarea,
       nombre : datos.nombre,
-      grupo_idgrupo : datos.grupo_idgrupo
+      grupo_idgrupo : datos.grupo_idgrupo,
+      esEnEquipo : datos.esEnEquipo
     };
 }
 
@@ -127,6 +128,21 @@ router.get('/getEquipo',function(request,response){
             response.status(500).json({"mensaje":false});
           }
         });
+      }
+      else
+      {
+        response.status(500).json({"mensaje":false});
+      }
+    });
+});
+
+router.get('/getTareaPorGrupo',function(request,response){
+  var id = request.query.id;
+  tareasModel.getTareaPorGroupo(id,function(error, datos)
+    {
+      if(!error)
+      {
+        response.status(200).json({"mensaje":true, "Informacion":datos});
       }
       else
       {
