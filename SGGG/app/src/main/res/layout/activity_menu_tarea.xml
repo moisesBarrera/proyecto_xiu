@@ -20,7 +20,8 @@
         android:id="@+id/button4"
         android:layout_alignParentEnd="true"
         android:background="@color/colorAccent"
-        android:textColor="@color/color_white" />
+        android:textColor="@color/color_white"
+        android:onClick="VistaTareas" />
 
     <ListView
         android:layout_width="match_parent"

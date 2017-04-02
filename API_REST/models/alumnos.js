@@ -54,6 +54,7 @@ Alumnos.getAlumnosByGrupo = function(id,callback)
 	if (connection) 
 	{
 		var sql = 'SELECT * FROM Alumnos WHERE grupo_idgrupo = ' + connection.escape(id);
+		console.log(sql);
 		connection.query(sql, function(error, row) 
 		{
 			if(error)

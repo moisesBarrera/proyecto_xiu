@@ -15,12 +15,13 @@ Tareas.insertTarea= function(tareaData,callback)
 {
 	if (connection) 
 	{
-		var sql = 'INSERT INTO tarea (nombre,grupo_idgrupo) VALUES ('+connection.escape(tareaData.nombre)+','+connection.escape(tareaData.grupo_idgrupo)+')';
+		var sql = 'call nueva_tarea('+connection.escape(tareaData.nombre)+','+connection.escape(tareaData.grupo_idgrupo)+')';
 		//console.log(sql +"-------");
 		console.log(sql);
 		connection.query(sql, function(error, result) 
 		{
 			//console.log(result[0][0].id);
+			console.log(error);
 			if(error)
 			{
 				callback(true,null);
@@ -28,7 +29,7 @@ Tareas.insertTarea= function(tareaData,callback)
 			else
 			{
 				//devolvemos el id del usuario insertado
-				callback(null, true);
+				callback(null, result[0][0].id);
 			}
 		});
 	}

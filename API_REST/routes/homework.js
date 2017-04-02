@@ -40,9 +40,11 @@ router.get('/crearTarea',function(request,response){
   //console.log(datosTarea);
   tareasModel.insertTarea(datosTarea,function(error, datos)
     {
+      //console.log(error);
+      //console.log(datos);
       if(!error)
       {
-        response.status(200).json({"mensaje":true});
+        response.status(200).json({"mensaje":true, "id":datos});
       }
       else
       {

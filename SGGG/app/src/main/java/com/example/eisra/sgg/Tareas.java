@@ -13,12 +13,20 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import com.example.eisra.sgg.Modelos.Alumno;
+import com.example.eisra.sgg.Modelos.DatosEscuela;
+import com.example.eisra.sgg.Modelos.DatosMaestro;
 import com.example.eisra.sgg.Servicios.peticiones;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,7 +43,7 @@ public class Tareas extends AppCompatActivity {
     Switch equipos;
     EditText NombreTarea;
     EditText numIntegrantes;
-
+    int idTarea;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,18 +68,18 @@ public class Tareas extends AppCompatActivity {
 
     public void CrearTarea(View v){
         String NameHomework = NombreTarea.getText().toString();
-        int integrantes = Integer.parseInt(numIntegrantes.getText().toString());
         boolean enEquipos = equipos.isChecked();
         Random rand = null;
         try{
-            new CargarDatos().execute(peticiones.ip+"/crearTarea?nombre=" + NameHomework+"&grupo_idgrupo="+peticiones.idGrup);
+            String sql = "http://"+peticiones.ip+"/crearTarea?nombre=" + NameHomework+"&grupo_idgrupo="+peticiones.idGrup;
+            new CargarDatosTarea().execute(sql);
             Toast.makeText(getApplicationContext(), "Tarea Crada", Toast.LENGTH_LONG).show();
             if(enEquipos){
 
             } else {
                 for(int i=3;i<=9;i++){
-                    new CargarDatos().execute(peticiones.ip+"/asignarIntegrantesATarea?tarea_idtarea=" + 3+"&Alumnos_idAlumnos="+i);
-                    new CargarDatos().execute(peticiones.ip+"/asignarCalificacion?tarea_idtarea=" + 3+"&Alumnos_idAlumnos="+i+"&calificacion="+ rand.nextInt((6 - 10) + 1) + 6);
+                    new CargarDatos().execute("http://"+peticiones.ip+"/asignarIntegrantesATarea?tarea_idtarea=" + 3+"&Alumnos_idAlumnos="+i);
+                    new CargarDatos().execute("http://"+peticiones.ip+"/asignarCalificacion?tarea_idtarea=" + 3+"&Alumnos_idAlumnos="+i+"&calificacion="+ rand.nextInt((6 - 10) + 1) + 6);
                 }
             }
         } catch(Exception e){
@@ -80,6 +88,25 @@ public class Tareas extends AppCompatActivity {
         Intent i= new Intent(this, MenuGrupos.class);
         startActivity(i);
         finish();
+    }
+
+    private class CargarDatosTarea extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                System.out.println(urls[0]);
+                return downloadUrl(urls[0]);
+            } catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+        }
     }
 
     private class CargarDatos extends AsyncTask<String, Void, String> {
@@ -97,6 +124,12 @@ public class Tareas extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
+            Gson gson = new Gson();
+            try {
+                JSONObject obj = new JSONObject(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
