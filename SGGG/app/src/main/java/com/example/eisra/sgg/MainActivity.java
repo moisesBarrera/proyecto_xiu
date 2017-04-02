@@ -25,7 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
-    public static String ip="192.168.1.68:5000";
+    public static String ip="192.168.1.70:5000";
     public static int idUsuario=0;
     TextView usuario,contraseña;
     Button boton;
@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                new ConsultarDatos().execute("http://192.168.1.68:5000/login?usuario=" + usuario.getText().toString().trim()+"&contrasena="+contraseña.getText().toString().trim()+"");
-                System.out.println("http://192.168.1.68:5000/login?usuario=" + usuario.getText().toString().trim()+"&contrasena="+contraseña.getText().toString().trim()+"");
+                new ConsultarDatos().execute("http://"+ip+"/login?usuario=" + usuario.getText().toString().trim()+"&contrasena="+contraseña.getText().toString().trim()+"");
+                System.out.println("http://"+ip+"/login?usuario=" + usuario.getText().toString().trim()+"&contrasena="+contraseña.getText().toString().trim()+"");
             }});
 
     }

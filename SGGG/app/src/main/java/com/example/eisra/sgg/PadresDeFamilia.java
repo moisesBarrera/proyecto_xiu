@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -18,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class PadresDeFamilia extends AppCompatActivity {
+
 
 
     EditText nombre, apellidos, telefono, correo,direccion;
@@ -33,6 +36,7 @@ public class PadresDeFamilia extends AppCompatActivity {
         correo = (EditText)findViewById(R.id.editText6);
         direccion = (EditText)findViewById(R.id.editText7);
         boton = (Button)findViewById(R.id.button);
+
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override

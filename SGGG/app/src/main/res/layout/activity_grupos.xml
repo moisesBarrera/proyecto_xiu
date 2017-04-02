@@ -11,4 +11,23 @@
     tools:context="com.example.eisra.sgg.Grupos"
     android:background="@android:color/holo_orange_light">
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/listapapu"
+        android:background="@color/color_white"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:theme="@style/TemaBoton"
+        android:onClick="alumnos"
+        android:text="Agregar"
+        android:textColor="@color/color_white"
+        android:id="@+id/button5" />
 </RelativeLayout>

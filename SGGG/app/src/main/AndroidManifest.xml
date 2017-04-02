@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".Login" />
         <activity android:name=".Registro" />
-        <activity android:name=".Grupos" />
+        <activity android:name=".MenuPadres"
+            />
         <activity android:name=".PadresDeFamilia" />
         <activity android:name=".DatosEscolares" />
         <activity android:name=".Alumnos" />
@@ -32,8 +33,9 @@
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".MenuInfo" />
         <activity android:name=".MenuGrupos" />
-        <activity android:name=".MenuPadres" />
+        <activity android:name=".TodosAlumnos" />
         <activity android:name=".Tareas"></activity>
+        <activity android:name=".Grupos"></activity>
     </application>
 
 </manifest>
