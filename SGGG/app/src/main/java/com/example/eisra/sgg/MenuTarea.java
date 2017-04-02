@@ -6,19 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.Switch;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.TextView;
-import android.widget.Toast;
-import java.util.Random;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.example.eisra.sgg.Modelos.Alumno;
+import com.example.eisra.sgg.Modelos.DatosEscuela;
 import com.example.eisra.sgg.Servicios.peticiones;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,62 +25,31 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
-import static android.R.attr.max;
+public class MenuTarea extends AppCompatActivity {
 
-public class Tareas extends AppCompatActivity {
-    RelativeLayout generarEquipos;
-    Switch equipos;
-    EditText NombreTarea;
-    EditText numIntegrantes;
 
+    ListView tareas;
+    ArrayList<Alumno> Alumnos = new ArrayList<Alumno>();
+    ArrayAdapter<String> Nombres;
+    private String[] sistemas = {"Tarea 1","Tarea 2", "Tarea 3"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tareas);
-        generarEquipos =  (RelativeLayout) findViewById(R.id.View_GenerarEquipo);
-        generarEquipos.setVisibility(View.INVISIBLE);
-        equipos = (Switch) findViewById(R.id.switch_1);
-        equipos.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    generarEquipos.setVisibility(View.VISIBLE);
-                } else {
-                    generarEquipos.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-        NombreTarea = (EditText) findViewById(R.id.txt_NomTarea);
-        numIntegrantes = (EditText) findViewById(R.id.txt_NumInte);
-
+        setContentView(R.layout.activity_menu_tarea);
+        tareas = (ListView) findViewById(R.id.Tareas);
+        new ConsultarDatos().execute(peticiones.ip+"/alumnoByGrupo?grupo_idgrupo=" + 1);
+        Nombres = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sistemas);
+        tareas.setAdapter(Nombres);
     }
 
-    public void CrearTarea(View v){
-        String NameHomework = NombreTarea.getText().toString();
-        int integrantes = Integer.parseInt(numIntegrantes.getText().toString());
-        boolean enEquipos = equipos.isChecked();
-        Random rand = null;
-        try{
-            new CargarDatos().execute(peticiones.ip+"/crearTarea?nombre=" + NameHomework+"&grupo_idgrupo="+peticiones.idGrup);
-            Toast.makeText(getApplicationContext(), "Tarea Crada", Toast.LENGTH_LONG).show();
-            if(enEquipos){
-
-            } else {
-                for(int i=3;i<=9;i++){
-                    new CargarDatos().execute(peticiones.ip+"/asignarIntegrantesATarea?tarea_idtarea=" + 3+"&Alumnos_idAlumnos="+i);
-                    new CargarDatos().execute(peticiones.ip+"/asignarCalificacion?tarea_idtarea=" + 3+"&Alumnos_idAlumnos="+i+"&calificacion="+ rand.nextInt((6 - 10) + 1) + 6);
-                }
-            }
-        } catch(Exception e){
-            e.getMessage();
-        }
-        Intent i= new Intent(this, MenuGrupos.class);
+    public void VistaTareas(View v){
+        Intent i= new Intent(this, Tareas.class);
         startActivity(i);
-        finish();
     }
 
-    private class CargarDatos extends AsyncTask<String, Void, String> {
+    private class ConsultarDatos extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
 
@@ -97,7 +64,19 @@ public class Tareas extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
+            try {
+                Gson gson = new Gson();
+                JSONObject obj = new JSONObject(result);
+                JSONArray j = new JSONArray(obj.getString("Informacion").toString());
+                for(int i=0;i<=7;i++) {
+                    Alumnos.add(gson.fromJson(j.getString(i).toString(), Alumno.class));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
+
     }
 
     private String downloadUrl(String myurl) throws IOException {

@@ -33,9 +33,16 @@
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".MenuInfo" />
         <activity android:name=".MenuGrupos" />
+<<<<<<< HEAD
         <activity android:name=".TodosAlumnos" />
         <activity android:name=".Tareas"></activity>
         <activity android:name=".Grupos"></activity>
+=======
+        <activity android:name=".MenuPadres" />
+        <activity android:name=".Tareas" />
+        <activity android:name=".TodosAlumnos" />
+        <activity android:name=".MenuTarea"></activity>
+>>>>>>> origin/master
     </application>
 
 </manifest>
