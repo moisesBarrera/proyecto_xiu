@@ -1,11 +1,17 @@
-package com.example.eisra.sgg.Servicios;
+package com.example.eisra.sgg;
 
 import android.os.AsyncTask;
+import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.example.eisra.sgg.Modelos.tarea;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,71 +21,19 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by moisesbarrerakeb on 29/03/17.
- */
+public class detalle_tarea extends AppCompatActivity {
 
-public class peticiones {
+    String id;
 
-    static  public String ip = "192.168.1.68:5000";
-    static  public  int idGrup = 1;
-    static public int idtareagroupEquipo=3;
-
-    private class CargarDatos extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-
-        }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detalle_tarea);
+        Bundle parametros = getIntent().getExtras();
+        id = parametros.getString("id");
+        System.out.println(id);
     }
 
-    private class EditarDatos extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-
-
-        }
-    }
-
-    private class EliminarDatos extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-
-
-        }
-    }
 
     private class ConsultarDatos extends AsyncTask<String, Void, String> {
         @Override
@@ -96,9 +50,10 @@ public class peticiones {
         @Override
         protected void onPostExecute(String result) {
 
-            JSONArray ja = null;
             try {
-                ja = new JSONArray(result);
+                Gson gson = new Gson();
+                JSONObject obj = new JSONObject(result);
+                JSONArray j = new JSONArray(obj.getString("Informacion").toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

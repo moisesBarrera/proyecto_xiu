@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.eisra.sgg.Modelos.Alumno;
 import com.example.eisra.sgg.Modelos.DatosEscuela;
+import com.example.eisra.sgg.Modelos.tarea;
 import com.example.eisra.sgg.Servicios.peticiones;
 import com.google.gson.Gson;
 
@@ -26,22 +28,44 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuTarea extends AppCompatActivity {
 
 
-    ListView tareas;
-    ArrayList<Alumno> Alumnos = new ArrayList<Alumno>();
-    ArrayAdapter<String> Nombres;
-    private String[] sistemas = {"Tarea 1","Tarea 2", "Tarea 3"};
+    public static List<String> lista = new ArrayList<String>();
+    public List<tarea> listatareas = new ArrayList<tarea>();
+    ArrayAdapter<String> listaAdap;
+    ListView list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_tarea);
-        tareas = (ListView) findViewById(R.id.Tareas);
-        new ConsultarDatos().execute(peticiones.ip+"/alumnoByGrupo?grupo_idgrupo=" + 1);
-        Nombres = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sistemas);
-        tareas.setAdapter(Nombres);
+    }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        listatareas = new ArrayList<tarea>();
+        lista.clear();
+        listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
+        list = (ListView)findViewById(R.id.Tareas);
+        list.setAdapter(listaAdap);
+        new ConsultarDatos().execute("http://"+MainActivity.ip+"/getTareaPorGrupo?id="+peticiones.idGrup);
+        listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
+        list = (ListView)findViewById(R.id.Tareas);
+        list.setAdapter(listaAdap);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MenuTarea.this, detalle_tarea.class);
+                String d = listatareas.get(position).getIdtarea() + "";
+                intent.putExtra("id", d);
+                startActivity(intent);
+            }
+        });
     }
 
     public void VistaTareas(View v){
@@ -68,8 +92,11 @@ public class MenuTarea extends AppCompatActivity {
                 Gson gson = new Gson();
                 JSONObject obj = new JSONObject(result);
                 JSONArray j = new JSONArray(obj.getString("Informacion").toString());
-                for(int i=0;i<=7;i++) {
-                    Alumnos.add(gson.fromJson(j.getString(i).toString(), Alumno.class));
+                for(int i=0;i<j.length();i++) {
+                    tarea tare = gson.fromJson(j.getString(i).toString(), tarea.class);
+                    String a = tare.getNombre();
+                    listatareas.add(tare);
+                    lista.add(a);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

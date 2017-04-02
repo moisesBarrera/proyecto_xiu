@@ -71,22 +71,20 @@ public class Tareas extends AppCompatActivity {
         boolean enEquipos = equipos.isChecked();
         Random rand = null;
         try{
-            String sql = "http://"+peticiones.ip+"/crearTarea?nombre=" + NameHomework+"&grupo_idgrupo="+peticiones.idGrup;
+            String sql = "http://"+peticiones.ip+"/crearTarea?nombre=" + NameHomework+"&grupo_idgrupo="+peticiones.idGrup+"&esEnEquipo="+enEquipos;
             new CargarDatosTarea().execute(sql);
             Toast.makeText(getApplicationContext(), "Tarea Crada", Toast.LENGTH_LONG).show();
-            if(enEquipos){
+           /* if(enEquipos){
 
             } else {
                 for(int i=3;i<=9;i++){
                     new CargarDatos().execute("http://"+peticiones.ip+"/asignarIntegrantesATarea?tarea_idtarea=" + 3+"&Alumnos_idAlumnos="+i);
                     new CargarDatos().execute("http://"+peticiones.ip+"/asignarCalificacion?tarea_idtarea=" + 3+"&Alumnos_idAlumnos="+i+"&calificacion="+ rand.nextInt((6 - 10) + 1) + 6);
                 }
-            }
+            }*/
         } catch(Exception e){
             e.getMessage();
         }
-        Intent i= new Intent(this, MenuGrupos.class);
-        startActivity(i);
         finish();
     }
 
