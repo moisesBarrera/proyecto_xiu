@@ -21,7 +21,7 @@ import java.net.URL;
 
 public class peticiones {
 
-    static  public String ip = "192.168.1.68:5000";
+    static  public String ip = "192.168.1.70:5000";
     static  public  int idGrup = 2;
     static public int idtareagroupEquipo=3;
 

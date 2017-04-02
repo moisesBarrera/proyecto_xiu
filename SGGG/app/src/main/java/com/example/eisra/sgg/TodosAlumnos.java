@@ -29,7 +29,7 @@ import java.util.List;
 public class TodosAlumnos extends AppCompatActivity {
 
     public static List<String> lista = new ArrayList<String>();
-    int idgrupo=2;
+    int idgrupo=1;
     ArrayAdapter<String> listaAdap;
     ListView list;
 
@@ -39,13 +39,18 @@ public class TodosAlumnos extends AppCompatActivity {
         setContentView(R.layout.activity_todos_alumnos);
     }
 
+
+
     @Override
     public void onResume(){
         super.onResume();
+
         new ConsultarDatos().execute("http://"+MainActivity.ip+"/alumnoByGrupo?grupo_idgrupo="+idgrupo);
+        lista.clear();
         listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
         list = (ListView)findViewById(R.id.listapapu);
         list.setAdapter(listaAdap);
+
 
     }
 
