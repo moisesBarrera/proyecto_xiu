@@ -29,12 +29,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class MenuTarea extends AppCompatActivity {
 
 
     public static List<String> lista = new ArrayList<String>();
     public List<tarea> listatareas = new ArrayList<tarea>();
+    public String[] h ={""};
     ArrayAdapter<String> listaAdap;
     ListView list;
 
@@ -48,11 +50,6 @@ public class MenuTarea extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        listatareas = new ArrayList<tarea>();
-        lista.clear();
-        listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
-        list = (ListView)findViewById(R.id.Tareas);
-        list.setAdapter(listaAdap);
         new ConsultarDatos().execute("http://"+MainActivity.ip+"/getTareaPorGrupo?id="+peticiones.idGrup);
         listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
         list = (ListView)findViewById(R.id.Tareas);
@@ -92,6 +89,8 @@ public class MenuTarea extends AppCompatActivity {
                 Gson gson = new Gson();
                 JSONObject obj = new JSONObject(result);
                 JSONArray j = new JSONArray(obj.getString("Informacion").toString());
+                listatareas = new ArrayList<tarea>();
+                lista.clear();
                 for(int i=0;i<j.length();i++) {
                     tarea tare = gson.fromJson(j.getString(i).toString(), tarea.class);
                     String a = tare.getNombre();

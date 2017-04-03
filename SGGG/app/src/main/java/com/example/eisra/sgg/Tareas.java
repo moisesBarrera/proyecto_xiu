@@ -73,7 +73,7 @@ public class Tareas extends AppCompatActivity {
         try{
             String sql = "http://"+peticiones.ip+"/crearTarea?nombre=" + NameHomework+"&grupo_idgrupo="+peticiones.idGrup+"&esEnEquipo="+enEquipos;
             new CargarDatosTarea().execute(sql);
-            Toast.makeText(getApplicationContext(), "Tarea Crada", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Tarea Creada", Toast.LENGTH_LONG).show();
            /* if(enEquipos){
 
             } else {
