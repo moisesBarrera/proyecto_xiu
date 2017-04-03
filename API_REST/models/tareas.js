@@ -104,6 +104,26 @@ Tareas.getTareaPorGroupo = function(id,callback)
 	}
 }
 
+//Obtenemos todos las tareas por grupo
+Tareas.getTareabyId = function(id,callback)
+{
+	if (connection) 
+	{
+		var sql = 'SELECT * FROM tarea WHERE idtarea='+connection.escape(id);
+		console.log(sql);
+		connection.query(sql, function(error, rows) {
+			if(error)
+			{
+				callback(true,null);
+			}
+			else
+			{
+				callback(null, rows);
+			}
+		});
+	}
+}
+
 //Obtenemos todos los equipos por tarea
 Tareas.getEquiposPorTarea = function(id,callback)
 {

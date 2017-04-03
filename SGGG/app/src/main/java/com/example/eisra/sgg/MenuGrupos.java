@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.eisra.sgg.Servicios.peticiones;
+
 public class MenuGrupos extends AppCompatActivity {
 
     TextView titulos;
@@ -25,6 +27,11 @@ public class MenuGrupos extends AppCompatActivity {
     }
     public void VistaTareas(View v){
         Intent i= new Intent(this, MenuTarea.class);
+        peticiones.idGrup = Grupos.idGrupo;
+        startActivity(i);
+    }
+    public void asientos(View v){
+        Intent i= new Intent(this, Acomodar.class);
         startActivity(i);
     }
 

@@ -1,12 +1,20 @@
 package com.example.eisra.sgg;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.eisra.sgg.Modelos.Alumno;
 import com.example.eisra.sgg.Modelos.tarea;
+import com.example.eisra.sgg.Servicios.peticiones;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -20,10 +28,19 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class detalle_tarea extends AppCompatActivity {
 
+    public static List<String> lista = new ArrayList<String>();
+    public List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+    public tarea Tarea = null;
+    public String[] h ={""};
+    ArrayAdapter<String> listaAdap;
+    ListView list;
     String id;
+    TextView titulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +49,79 @@ public class detalle_tarea extends AppCompatActivity {
         Bundle parametros = getIntent().getExtras();
         id = parametros.getString("id");
         System.out.println(id);
+        titulo = (TextView) findViewById(R.id.Titulo_Tarea);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        new ConsultarDatosTarea().execute("http://"+MainActivity.ip+"/getarea?id="+ id);
     }
 
 
-    private class ConsultarDatos extends AsyncTask<String, Void, String> {
+
+    private class ConsultarDatosTarea extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                return downloadUrl(urls[0]);
+            } catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+            try {
+                Gson gson = new Gson();
+                JSONObject obj = new JSONObject(result);
+                JSONArray j = new JSONArray(obj.getString("Informacion").toString());
+                Tarea = gson.fromJson(j.getString(0).toString(), tarea.class);
+                titulo.setText(Tarea.getNombre());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    private class ConsultarDatosAlumnos extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                return downloadUrl(urls[0]);
+            } catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+            try {
+                Gson gson = new Gson();
+                JSONObject obj = new JSONObject(result);
+                JSONArray j = new JSONArray(obj.getString("Informacion").toString());
+                for(int i=0;i<j.length();i++) {
+                    Alumno tare = gson.fromJson(j.getString(i).toString(), Alumno.class);
+                    String a = tare.getNombre();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
+    private class ConsultarDatosEquipos extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
 
