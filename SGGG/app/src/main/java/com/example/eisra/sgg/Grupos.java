@@ -66,7 +66,6 @@ public void menu(View v)
         super.onResume();
 
         new ConsultarDatos().execute("http://"+MainActivity.ip+"/gruposByUser?usuarios_idusuarios="+MainActivity.idUsuario);
-        lista.clear();
         listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
         list = (ListView)findViewById(R.id.listapapu);
         list.setAdapter(listaAdap);

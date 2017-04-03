@@ -31,6 +31,7 @@ public class TodosAlumnos extends AppCompatActivity {
     public static List<String> lista = new ArrayList<String>();
     int idgrupo=Grupos.idGrupo;
     ArrayAdapter<String> listaAdap;
+    List<Alumno> alumnoList = new ArrayList<Alumno>();
     ListView list;
 
     @Override
@@ -39,32 +40,10 @@ public class TodosAlumnos extends AppCompatActivity {
         setContentView(R.layout.activity_todos_alumnos);
     }
 
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        new ConsultarDatos().execute("http://"+MainActivity.ip+"/alumnoByGrupo?grupo_idgrupo="+idgrupo);
-        lista.clear();
-        listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
-        list = (ListView)findViewById(R.id.listapapu);
-        list.setAdapter(listaAdap);
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        new ConsultarDatos().execute("http://"+MainActivity.ip+"/alumnoByGrupo?grupo_idgrupo="+idgrupo);
-        lista.clear();
-        listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
-        list = (ListView)findViewById(R.id.listapapu);
-        list.setAdapter(listaAdap);
-    }
-
     @Override
     public void onResume(){
         super.onResume();
         new ConsultarDatos().execute("http://"+MainActivity.ip+"/alumnoByGrupo?grupo_idgrupo="+idgrupo);
-        lista.clear();
         listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
         list = (ListView)findViewById(R.id.listapapu);
         list.setAdapter(listaAdap);
@@ -98,6 +77,7 @@ public class TodosAlumnos extends AppCompatActivity {
                 JSONObject obj = new JSONObject(result);
                 JSONArray j = new JSONArray(obj.getString("Informacion").toString());
                 List<Alumno> alumnoList = new ArrayList<Alumno>();
+                lista.clear();
                 for(int i=0;i<j.length();i++) {
                     Alumno alumn = gson.fromJson(j.getString(i).toString(), Alumno.class);
                     String a = alumn.getNombre()+ "  "+ alumn.getMatricula();
@@ -117,7 +97,7 @@ public class TodosAlumnos extends AppCompatActivity {
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
         // web page content.
-        int len = 500;
+        int len = 5000;
 
         try {
             URL url = new URL(myurl);

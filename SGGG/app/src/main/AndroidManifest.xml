@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Grupos">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,10 +34,11 @@
         <activity android:name=".MenuTarea" />
         <activity android:name=".TodosAlumnos" />
         <activity android:name=".Tareas" />
-        <activity android:name=".Grupos" />
+        <activity android:name=".MenuGrupos" />
         <activity android:name=".MenuPadres" />
         <activity android:name=".CrearGrupo"/>
-        <activity android:name=".MenuGrupos"></activity>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".detalle_tarea"/>
     </application>
 
 </manifest>

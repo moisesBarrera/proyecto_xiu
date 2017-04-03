@@ -151,6 +151,20 @@ router.get('/getTareaPorGrupo',function(request,response){
     });
 });
 
+router.get('/getarea',function(request,response){
+  var id = request.query.id;
+  tareasModel.getTareabyId(id,function(error, datos)
+    {
+      if(!error)
+      {
+        response.status(200).json({"mensaje":true, "Informacion":datos});
+      }
+      else
+      {
+        response.status(500).json({"mensaje":false});
+      }
+    });
+});
 
 //Modificar tarea
 router.get('/updateTarea',function(request,response){
