@@ -26,7 +26,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:theme="@style/TemaBoton"
-        android:onClick="alumnos"
+        android:onClick="menu"
         android:text="Agregar"
         android:textColor="@color/color_white"
         android:id="@+id/button5" />

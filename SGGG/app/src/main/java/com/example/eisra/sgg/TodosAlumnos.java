@@ -29,7 +29,7 @@ import java.util.List;
 public class TodosAlumnos extends AppCompatActivity {
 
     public static List<String> lista = new ArrayList<String>();
-    int idgrupo=1;
+    int idgrupo=Grupos.idGrupo;
     ArrayAdapter<String> listaAdap;
     ListView list;
 
@@ -40,17 +40,34 @@ public class TodosAlumnos extends AppCompatActivity {
     }
 
 
-
     @Override
-    public void onResume(){
-        super.onResume();
-
+    public void onBackPressed() {
+        super.onBackPressed();
         new ConsultarDatos().execute("http://"+MainActivity.ip+"/alumnoByGrupo?grupo_idgrupo="+idgrupo);
         lista.clear();
         listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
         list = (ListView)findViewById(R.id.listapapu);
         list.setAdapter(listaAdap);
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        new ConsultarDatos().execute("http://"+MainActivity.ip+"/alumnoByGrupo?grupo_idgrupo="+idgrupo);
+        lista.clear();
+        listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
+        list = (ListView)findViewById(R.id.listapapu);
+        list.setAdapter(listaAdap);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        new ConsultarDatos().execute("http://"+MainActivity.ip+"/alumnoByGrupo?grupo_idgrupo="+idgrupo);
+        lista.clear();
+        listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
+        list = (ListView)findViewById(R.id.listapapu);
+        list.setAdapter(listaAdap);
 
     }
 

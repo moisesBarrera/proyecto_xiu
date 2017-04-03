@@ -47,7 +47,7 @@ public class Alumnos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                new CargarDatos().execute("http://"+MainActivity.ip+"/insertAlumno?nombre=" + nombre.getText().toString().trim()+"&apellido="+apellidos.getText().toString().trim()+"&genero="+genero.getSelectedItem().toString()+"&curp="+curp.getText().toString().trim()+"&matricula="+matricula.getText().toString().trim()+"&usuario_idusuario="+MainActivity.idUsuario+"&observaciones="+observaciones.getText().toString().trim()+"&grupo_idgrupo=1");
+                new CargarDatos().execute("http://"+MainActivity.ip+"/insertAlumno?nombre=" + nombre.getText().toString().trim()+"&apellido="+apellidos.getText().toString().trim()+"&genero="+genero.getSelectedItem().toString()+"&curp="+curp.getText().toString().trim()+"&matricula="+matricula.getText().toString().trim()+"&usuario_idusuario="+MainActivity.idUsuario+"&observaciones="+observaciones.getText().toString().trim()+"&grupo_idgrupo="+Grupos.idGrupo+"&idPadre=1");
             }
         });
     }
