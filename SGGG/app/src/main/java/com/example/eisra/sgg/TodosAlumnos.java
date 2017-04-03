@@ -117,7 +117,7 @@ public class TodosAlumnos extends AppCompatActivity {
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
         // web page content.
-        int len = 500;
+        int len = 50000;
 
         try {
             URL url = new URL(myurl);
