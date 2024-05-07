@@ -11,7 +11,8 @@ function formatearTarea(datos){
     return {
       idtarea : datos.idtarea,
       nombre : datos.nombre,
-      grupo_idgrupo : datos.grupo_idgrupo
+      grupo_idgrupo : datos.grupo_idgrupo,
+      esEnEquipo : datos.esEnEquipo
     };
 }
 
@@ -40,9 +41,11 @@ router.get('/crearTarea',function(request,response){
   //console.log(datosTarea);
   tareasModel.insertTarea(datosTarea,function(error, datos)
     {
+      //console.log(error);
+      //console.log(datos);
       if(!error)
       {
-        response.status(200).json({"mensaje":true});
+        response.status(200).json({"mensaje":true, "id":datos});
       }
       else
       {
@@ -133,6 +136,35 @@ router.get('/getEquipo',function(request,response){
     });
 });
 
+router.get('/getTareaPorGrupo',function(request,response){
+  var id = request.query.id;
+  tareasModel.getTareaPorGroupo(id,function(error, datos)
+    {
+      if(!error)
+      {
+        response.status(200).json({"mensaje":true, "Informacion":datos});
+      }
+      else
+      {
+        response.status(500).json({"mensaje":false});
+      }
+    });
+});
+
+router.get('/getarea',function(request,response){
+  var id = request.query.id;
+  tareasModel.getTareabyId(id,function(error, datos)
+    {
+      if(!error)
+      {
+        response.status(200).json({"mensaje":true, "Informacion":datos});
+      }
+      else
+      {
+        response.status(500).json({"mensaje":false});
+      }
+    });
+});
 
 //Modificar tarea
 router.get('/updateTarea',function(request,response){

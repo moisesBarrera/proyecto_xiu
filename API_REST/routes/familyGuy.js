@@ -33,7 +33,13 @@ router.get('/padreFamiliaById', function(request, response) {
       {
         if (!error && datos.length > 0)
         {
-          response.status(200).json({"mensaje":true, "Informacion":datos});
+          padresModel.getHijosdeUnpadre(id,function(error,data){
+            if(!error){
+              response.status(200).json({"mensaje":true, "datosPadre":datos,"Hijos":data});
+            } else {
+              response.status(500).json({"mensaje":false});
+            }
+          });
         }
         else
         {

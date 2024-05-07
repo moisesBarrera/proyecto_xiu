@@ -8,25 +8,25 @@ public class DatosMaestro {
      String mensaje;
      int idMaestro;
      String nombre;
-     String apellidos;
+     String apellido;
      String rfc;
-     String cedula;
-     String estudios;
+     String cedulaProfesional;
+     String gradoMaxEstudios;
      String curp;
-     String direccion;
+     String domicilioParticular;
      String telefono;
      int usuario_idusuario;
 
 
-    public DatosMaestro(String mensaje, String nombre, String apellidos, String rfc, String cedula,String estudios, String curp, String direccion, String telefono, int usuario_idusuario)
+    public DatosMaestro(String mensaje, String nombre, String apellido, String rfc, String cedulaProfesional, String gradoMaxEstudios, String curp, String domicilioParticular, String telefono, int usuario_idusuario)
     {
         this.setNombre(nombre);
-        this.setApellidos(apellidos);
+        this.setApellido(apellido);
         this.setRfc(rfc);
-        this.setCedula(cedula);
-        this.setEstudios(estudios);
+        this.setCedulaProfesional(cedulaProfesional);
+        this.setGradoMaxEstudios(gradoMaxEstudios);
         this.setCurp(curp);
-        this.setDireccion(direccion);
+        this.setDomicilioParticular(domicilioParticular);
         this.setTelefono(telefono);
         this.setUsuario_idusuario(usuario_idusuario);
     }
@@ -55,12 +55,12 @@ public class DatosMaestro {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getRfc() {
@@ -71,20 +71,20 @@ public class DatosMaestro {
         this.rfc = rfc;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getCedulaProfesional() {
+        return cedulaProfesional;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setCedulaProfesional(String cedulaProfesional) {
+        this.cedulaProfesional = cedulaProfesional;
     }
 
-    public String getEstudios() {
-        return estudios;
+    public String getGradoMaxEstudios() {
+        return gradoMaxEstudios;
     }
 
-    public void setEstudios(String estudios) {
-        this.estudios = estudios;
+    public void setGradoMaxEstudios(String gradoMaxEstudios) {
+        this.gradoMaxEstudios = gradoMaxEstudios;
     }
 
     public String getCurp() {
@@ -95,12 +95,12 @@ public class DatosMaestro {
         this.curp = curp;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getDomicilioParticular() {
+        return domicilioParticular;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDomicilioParticular(String domicilioParticular) {
+        this.domicilioParticular = domicilioParticular;
     }
 
     public String getTelefono() {

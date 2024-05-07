@@ -17,7 +17,8 @@ function formatearAlumnos(datos){
       matricula : datos.matricula,
       usuario_idusuario : datos.usuario_idusuario,
       observaciones : datos.observaciones,
-      grupo_idgrupo : datos.grupo_idgrupo
+      grupo_idgrupo : datos.grupo_idgrupo,
+      idPadre : datos.idPadre
     };
 }
 
@@ -35,7 +36,13 @@ router.get('/alumnoById', function(request, response) {
       {
         if (!error && datos.length > 0)
         {
-          response.status(200).json({"mensaje":true, "Informacion":datos});
+          alumnosModel.getFather(id,function(error,data){
+            if(!error){
+              response.status(200).json({"mensaje":true, "Hijo":datos,"Padre":data});
+            } else {
+              response.status(500).json({"mensaje":false});
+            }
+          });
         }
         else
         {

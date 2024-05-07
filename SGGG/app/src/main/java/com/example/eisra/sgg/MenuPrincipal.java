@@ -17,8 +17,8 @@ public class MenuPrincipal extends AppCompatActivity {
 
 
 
-        grupos = (Button) findViewById(R.id.button2);
-        padres = (Button) findViewById(R.id.button2);
+        grupos = (Button) findViewById(R.id.button1);
+        padres = (Button) findViewById(R.id.button3);
         info = (Button) findViewById(R.id.button2);
 
     }
@@ -26,7 +26,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
     public void Grupos(View v)
     {
-        Intent i= new Intent(this, MenuGrupos.class);
+        Intent i= new Intent(this, Grupos.class);
         startActivity(i);
     }
 

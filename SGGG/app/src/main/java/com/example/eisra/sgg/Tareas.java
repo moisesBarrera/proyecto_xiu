@@ -1,16 +1,27 @@
 package com.example.eisra.sgg;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import com.example.eisra.sgg.Modelos.Alumno;
 import com.example.eisra.sgg.Modelos.DatosEscuela;
+import com.example.eisra.sgg.Modelos.DatosMaestro;
+import com.example.eisra.sgg.Servicios.peticiones;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -24,36 +35,77 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
-import java.util.ArrayList;
 
+import static android.R.attr.max;
 
-public class DatosEscolares extends AppCompatActivity {
-
-    private TextView nombre,cct,sector,zona,direccion;
-    private Spinner turno;
-    private Button boton;
+public class Tareas extends AppCompatActivity {
+    RelativeLayout generarEquipos;
+    Switch equipos;
+    EditText NombreTarea;
+    EditText numIntegrantes;
+    int idTarea;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_datos_escolares);
-        nombre=(TextView) findViewById(R.id.editText3);
-        cct=(TextView) findViewById(R.id.editText4);
-        sector=(TextView) findViewById(R.id.editText7);
-        zona=(TextView) findViewById(R.id.editText8);
-        direccion=(TextView) findViewById(R.id.editText9);
-        turno=(Spinner) findViewById(R.id.spTurno);
-        boton =(Button) findViewById(R.id.button);
-        new ConsultarDatos().execute("http://"+MainActivity.ip+"/getEscuela?id="+MainActivity.idUsuario);
-        boton.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_tareas);
+        generarEquipos =  (RelativeLayout) findViewById(R.id.View_GenerarEquipo);
+        generarEquipos.setVisibility(View.INVISIBLE);
+        equipos = (Switch) findViewById(R.id.switch_1);
+        equipos.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                new CargarDatos().execute("http://"+MainActivity.ip+"/updateEscuela?nombre=" + nombre.getText().toString().trim()+"&turno="+turno.getSelectedItemPosition()+"&cct="+cct.getText().toString().trim()+"&sector="+sector.getText().toString().trim()+"&zonaEscolar="+zona.getText().toString().trim()+"&ubicacion="+direccion.getText().toString().trim()+"&usuarios_idusuarios="+MainActivity.idUsuario);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    generarEquipos.setVisibility(View.VISIBLE);
+                } else {
+                    generarEquipos.setVisibility(View.INVISIBLE);
+                }
             }
         });
+        NombreTarea = (EditText) findViewById(R.id.txt_NomTarea);
+        numIntegrantes = (EditText) findViewById(R.id.txt_NumInte);
+
     }
 
-//Comentario agregado para ver que pedo con el git
+    public void CrearTarea(View v){
+        String NameHomework = NombreTarea.getText().toString();
+        boolean enEquipos = equipos.isChecked();
+        Random rand = null;
+        try{
+            String sql = "http://"+peticiones.ip+"/crearTarea?nombre=" + NameHomework+"&grupo_idgrupo="+peticiones.idGrup+"&esEnEquipo="+enEquipos;
+            new CargarDatosTarea().execute(sql);
+            Toast.makeText(getApplicationContext(), "Tarea Creada", Toast.LENGTH_LONG).show();
+           /* if(enEquipos){
+
+            } else {
+                for(int i=3;i<=9;i++){
+                    new CargarDatos().execute("http://"+peticiones.ip+"/asignarIntegrantesATarea?tarea_idtarea=" + 3+"&Alumnos_idAlumnos="+i);
+                    new CargarDatos().execute("http://"+peticiones.ip+"/asignarCalificacion?tarea_idtarea=" + 3+"&Alumnos_idAlumnos="+i+"&calificacion="+ rand.nextInt((6 - 10) + 1) + 6);
+                }
+            }*/
+        } catch(Exception e){
+            e.getMessage();
+        }
+        finish();
+    }
+
+    private class CargarDatosTarea extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                System.out.println(urls[0]);
+                return downloadUrl(urls[0]);
+            } catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+        }
+    }
 
     private class CargarDatos extends AsyncTask<String, Void, String> {
         @Override
@@ -70,48 +122,14 @@ public class DatosEscolares extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
-            Toast.makeText(getApplicationContext(), "Se almacenaron los datos correctamente", Toast.LENGTH_LONG).show();
-
-        }
-    }
-
-
-    private class ConsultarDatos extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-
-            // params comes from the execute() call: params[0] is the url.
+            Gson gson = new Gson();
             try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-
-            try {
-                Gson gson = new Gson();
                 JSONObject obj = new JSONObject(result);
-                JSONArray j = new JSONArray(obj.getString("Informacion").toString());
-                DatosEscuela frutas = gson.fromJson(j.getString(0).toString(), DatosEscuela.class);
-                nombre.setText(frutas.getNombre());
-                cct.setText(frutas.getCct());
-                direccion.setText(frutas.getUbicacion());
-                sector.setText(frutas.getSector());
-                zona.setText(frutas.getZonaEscolar());
-                turno.setSelection(frutas.getTurno());
-
-
-            } catch (Exception e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
-
 
     private String downloadUrl(String myurl) throws IOException {
         Log.i("URL",""+myurl);
@@ -131,6 +149,7 @@ public class DatosEscolares extends AppCompatActivity {
             // Starts the query
             conn.connect();
             int response = conn.getResponseCode();
+            conn.getResponseMessage();
             Log.d("respuesta", "The response is: " + response);
             is = conn.getInputStream();
 

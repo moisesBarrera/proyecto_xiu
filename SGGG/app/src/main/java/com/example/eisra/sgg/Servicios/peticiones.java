@@ -1,21 +1,11 @@
-package com.example.eisra.sgg;
+package com.example.eisra.sgg.Servicios;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.eisra.sgg.Modelos.DatosEscuela;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,36 +14,16 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
-import java.util.ArrayList;
 
+/**
+ * Created by moisesbarrerakeb on 29/03/17.
+ */
 
-public class DatosEscolares extends AppCompatActivity {
+public class peticiones {
 
-    private TextView nombre,cct,sector,zona,direccion;
-    private Spinner turno;
-    private Button boton;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_datos_escolares);
-        nombre=(TextView) findViewById(R.id.editText3);
-        cct=(TextView) findViewById(R.id.editText4);
-        sector=(TextView) findViewById(R.id.editText7);
-        zona=(TextView) findViewById(R.id.editText8);
-        direccion=(TextView) findViewById(R.id.editText9);
-        turno=(Spinner) findViewById(R.id.spTurno);
-        boton =(Button) findViewById(R.id.button);
-        new ConsultarDatos().execute("http://"+MainActivity.ip+"/getEscuela?id="+MainActivity.idUsuario);
-        boton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new CargarDatos().execute("http://"+MainActivity.ip+"/updateEscuela?nombre=" + nombre.getText().toString().trim()+"&turno="+turno.getSelectedItemPosition()+"&cct="+cct.getText().toString().trim()+"&sector="+sector.getText().toString().trim()+"&zonaEscolar="+zona.getText().toString().trim()+"&ubicacion="+direccion.getText().toString().trim()+"&usuarios_idusuarios="+MainActivity.idUsuario);
-            }
-        });
-    }
-
-//Comentario agregado para ver que pedo con el git
+    static  public String ip = "192.168.1.68:5000";
+    static  public  int idGrup = 1;
+    static public int idtareagroupEquipo=3;
 
     private class CargarDatos extends AsyncTask<String, Void, String> {
         @Override
@@ -70,11 +40,46 @@ public class DatosEscolares extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
-            Toast.makeText(getApplicationContext(), "Se almacenaron los datos correctamente", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private class EditarDatos extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                return downloadUrl(urls[0]);
+            } catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
 
         }
     }
 
+    private class EliminarDatos extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                return downloadUrl(urls[0]);
+            } catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+
+        }
+    }
 
     private class ConsultarDatos extends AsyncTask<String, Void, String> {
         @Override
@@ -91,27 +96,16 @@ public class DatosEscolares extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
+            JSONArray ja = null;
             try {
-                Gson gson = new Gson();
-                JSONObject obj = new JSONObject(result);
-                JSONArray j = new JSONArray(obj.getString("Informacion").toString());
-                DatosEscuela frutas = gson.fromJson(j.getString(0).toString(), DatosEscuela.class);
-                nombre.setText(frutas.getNombre());
-                cct.setText(frutas.getCct());
-                direccion.setText(frutas.getUbicacion());
-                sector.setText(frutas.getSector());
-                zona.setText(frutas.getZonaEscolar());
-                turno.setSelection(frutas.getTurno());
-
-
-            } catch (Exception e) {
+                ja = new JSONArray(result);
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
 
     }
-
 
     private String downloadUrl(String myurl) throws IOException {
         Log.i("URL",""+myurl);
@@ -131,6 +125,7 @@ public class DatosEscolares extends AppCompatActivity {
             // Starts the query
             conn.connect();
             int response = conn.getResponseCode();
+            conn.getResponseMessage();
             Log.d("respuesta", "The response is: " + response);
             is = conn.getInputStream();
 

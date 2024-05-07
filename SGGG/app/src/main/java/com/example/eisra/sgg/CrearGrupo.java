@@ -6,16 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.eisra.sgg.Modelos.DatosEscuela;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,36 +16,30 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
-import java.util.ArrayList;
 
+public class CrearGrupo extends AppCompatActivity {
 
-public class DatosEscolares extends AppCompatActivity {
+    EditText nombre;
+    Button boton;
 
-    private TextView nombre,cct,sector,zona,direccion;
-    private Spinner turno;
-    private Button boton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_datos_escolares);
-        nombre=(TextView) findViewById(R.id.editText3);
-        cct=(TextView) findViewById(R.id.editText4);
-        sector=(TextView) findViewById(R.id.editText7);
-        zona=(TextView) findViewById(R.id.editText8);
-        direccion=(TextView) findViewById(R.id.editText9);
-        turno=(Spinner) findViewById(R.id.spTurno);
-        boton =(Button) findViewById(R.id.button);
-        new ConsultarDatos().execute("http://"+MainActivity.ip+"/getEscuela?id="+MainActivity.idUsuario);
+        setContentView(R.layout.activity_crear_grupo);
+
+        nombre = (EditText)findViewById(R.id.editText1);
+        boton = (Button)findViewById(R.id.button);
+
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new CargarDatos().execute("http://"+MainActivity.ip+"/updateEscuela?nombre=" + nombre.getText().toString().trim()+"&turno="+turno.getSelectedItemPosition()+"&cct="+cct.getText().toString().trim()+"&sector="+sector.getText().toString().trim()+"&zonaEscolar="+zona.getText().toString().trim()+"&ubicacion="+direccion.getText().toString().trim()+"&usuarios_idusuarios="+MainActivity.idUsuario);
+                new CargarDatos().execute("http://"+MainActivity.ip+"/insertGrupo?nombre="+nombre.getText().toString().trim()+"&usuarios_idusuarios="+MainActivity.idUsuario);
+
             }
         });
     }
 
-//Comentario agregado para ver que pedo con el git
+
 
     private class CargarDatos extends AsyncTask<String, Void, String> {
         @Override
@@ -75,42 +61,6 @@ public class DatosEscolares extends AppCompatActivity {
         }
     }
 
-
-    private class ConsultarDatos extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-
-            try {
-                Gson gson = new Gson();
-                JSONObject obj = new JSONObject(result);
-                JSONArray j = new JSONArray(obj.getString("Informacion").toString());
-                DatosEscuela frutas = gson.fromJson(j.getString(0).toString(), DatosEscuela.class);
-                nombre.setText(frutas.getNombre());
-                cct.setText(frutas.getCct());
-                direccion.setText(frutas.getUbicacion());
-                sector.setText(frutas.getSector());
-                zona.setText(frutas.getZonaEscolar());
-                turno.setSelection(frutas.getTurno());
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
 
 
     private String downloadUrl(String myurl) throws IOException {

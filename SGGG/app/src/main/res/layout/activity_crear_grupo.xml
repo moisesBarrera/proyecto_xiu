@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_crear_grupo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.eisra.sgg.CrearGrupo"
+    android:background="@android:color/holo_orange_light">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="36dp">
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginTop="30dp"
+        android:id="@+id/editText1"
+        android:background="@color/color_white"
+        android:hint="Nombre del grupo"
+        android:paddingLeft="15dp"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:text="Nombre del grupo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textStyle="normal|bold"
+        android:textColor="@color/color_white"
+        android:textSize="15sp"
+        android:layout_below="@+id/editText3"
+        android:layout_centerHorizontal="true" />
+
+
+        <Button
+            android:text="Crear grupo"
+            android:layout_width="200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:id="@+id/button"
+            android:background="@color/colorAccent"
+            android:backgroundTint="@color/colorAccent"
+            android:theme="@style/TemaBoton"
+            android:textSize="18sp"
+            android:layout_height="60dp" />
+
+    </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

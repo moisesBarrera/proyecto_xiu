@@ -68,6 +68,31 @@ padreDeFamilia.getPadreDeFamiliaByUser = function(id,callback)
 	}
 }
 
+padreDeFamilia.getHijosdeUnpadre = function(id,callback){
+
+	if (connection) 
+	{
+		var sql = "SELECT Alumnos.nombre,Alumnos.apellido, grupo.nombre as 'GroupName' FROM Alumnos "+
+					'INNER JOIN Alumnos_has_PadresFamilia '+
+    				'ON Alumnos.idAlumnos = Alumnos_has_PadresFamilia.Alumnos_idAlumnos '+
+    				'INNER JOIN grupo '+
+    				'ON Alumnos.grupo_idgrupo = grupo.idgrupo '+
+    				'WHERE Alumnos_has_PadresFamilia.PadresFamilia_idPadresFamilia = ' + connection.escape(id);
+    				console.log(sql);
+		connection.query(sql, function(error, row) 
+		{
+			if(error)
+			{
+				callback(true,null);
+			}
+			else
+			{
+				callback(null, row);
+			}
+		});
+	}
+}
+
 //Añadir un nuevo usuario
 padreDeFamilia.insertPadreDeFamilia = function(padreData,callback)
 {

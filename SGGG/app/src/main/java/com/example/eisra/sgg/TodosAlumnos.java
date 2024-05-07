@@ -1,16 +1,15 @@
 package com.example.eisra.sgg;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-import com.example.eisra.sgg.Modelos.DatosEscuela;
+import com.example.eisra.sgg.Modelos.Alumno;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -24,55 +23,58 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
+public class TodosAlumnos extends AppCompatActivity {
 
-public class DatosEscolares extends AppCompatActivity {
+    public static List<String> lista = new ArrayList<String>();
+    int idgrupo=Grupos.idGrupo;
+    ArrayAdapter<String> listaAdap;
+    ListView list;
 
-    private TextView nombre,cct,sector,zona,direccion;
-    private Spinner turno;
-    private Button boton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_datos_escolares);
-        nombre=(TextView) findViewById(R.id.editText3);
-        cct=(TextView) findViewById(R.id.editText4);
-        sector=(TextView) findViewById(R.id.editText7);
-        zona=(TextView) findViewById(R.id.editText8);
-        direccion=(TextView) findViewById(R.id.editText9);
-        turno=(Spinner) findViewById(R.id.spTurno);
-        boton =(Button) findViewById(R.id.button);
-        new ConsultarDatos().execute("http://"+MainActivity.ip+"/getEscuela?id="+MainActivity.idUsuario);
-        boton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new CargarDatos().execute("http://"+MainActivity.ip+"/updateEscuela?nombre=" + nombre.getText().toString().trim()+"&turno="+turno.getSelectedItemPosition()+"&cct="+cct.getText().toString().trim()+"&sector="+sector.getText().toString().trim()+"&zonaEscolar="+zona.getText().toString().trim()+"&ubicacion="+direccion.getText().toString().trim()+"&usuarios_idusuarios="+MainActivity.idUsuario);
-            }
-        });
+        setContentView(R.layout.activity_todos_alumnos);
     }
 
-//Comentario agregado para ver que pedo con el git
 
-    private class CargarDatos extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        new ConsultarDatos().execute("http://"+MainActivity.ip+"/alumnoByGrupo?grupo_idgrupo="+idgrupo);
+        lista.clear();
+        listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
+        list = (ListView)findViewById(R.id.listapapu);
+        list.setAdapter(listaAdap);
+    }
 
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        new ConsultarDatos().execute("http://"+MainActivity.ip+"/alumnoByGrupo?grupo_idgrupo="+idgrupo);
+        lista.clear();
+        listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
+        list = (ListView)findViewById(R.id.listapapu);
+        list.setAdapter(listaAdap);
+    }
 
-            Toast.makeText(getApplicationContext(), "Se almacenaron los datos correctamente", Toast.LENGTH_LONG).show();
+    @Override
+    public void onResume(){
+        super.onResume();
+        new ConsultarDatos().execute("http://"+MainActivity.ip+"/alumnoByGrupo?grupo_idgrupo="+idgrupo);
+        lista.clear();
+        listaAdap=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
+        list = (ListView)findViewById(R.id.listapapu);
+        list.setAdapter(listaAdap);
 
-        }
+    }
+
+    public void alumnos(View  v)
+    {
+        Intent i = new Intent(this,Alumnos.class);
+        startActivity(i);
     }
 
 
@@ -95,16 +97,13 @@ public class DatosEscolares extends AppCompatActivity {
                 Gson gson = new Gson();
                 JSONObject obj = new JSONObject(result);
                 JSONArray j = new JSONArray(obj.getString("Informacion").toString());
-                DatosEscuela frutas = gson.fromJson(j.getString(0).toString(), DatosEscuela.class);
-                nombre.setText(frutas.getNombre());
-                cct.setText(frutas.getCct());
-                direccion.setText(frutas.getUbicacion());
-                sector.setText(frutas.getSector());
-                zona.setText(frutas.getZonaEscolar());
-                turno.setSelection(frutas.getTurno());
-
-
-            } catch (Exception e) {
+                List<Alumno> alumnoList = new ArrayList<Alumno>();
+                for(int i=0;i<j.length();i++) {
+                    Alumno alumn = gson.fromJson(j.getString(i).toString(), Alumno.class);
+                    String a = alumn.getNombre()+ "  "+ alumn.getMatricula();
+                    lista.add(a);
+                }
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
@@ -112,14 +111,13 @@ public class DatosEscolares extends AppCompatActivity {
 
     }
 
-
     private String downloadUrl(String myurl) throws IOException {
         Log.i("URL",""+myurl);
         myurl = myurl.replace(" ","%20");
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
         // web page content.
-        int len = 500;
+        int len = 50000;
 
         try {
             URL url = new URL(myurl);
@@ -131,6 +129,7 @@ public class DatosEscolares extends AppCompatActivity {
             // Starts the query
             conn.connect();
             int response = conn.getResponseCode();
+            conn.getResponseMessage();
             Log.d("respuesta", "The response is: " + response);
             is = conn.getInputStream();
 

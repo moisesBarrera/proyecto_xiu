@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_equipos"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.eisra.sgg.Tareas"
+    android:background="@android:color/holo_orange_light">
+
+    <TextView
+        android:text="Agregar Tarea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:textColor="@android:color/background_light"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/txt_NomTarea"
+        android:background="@android:color/background_light"
+        android:hint="Nombre de la Tarea"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/textView6"
+        android:layout_centerHorizontal="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:id="@+id/switch_1"
+        android:layout_below="@+id/txt_NomTarea"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Individual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/switch_1"
+        android:layout_toStartOf="@+id/textView6"
+        android:layout_marginEnd="12dp"
+        android:id="@+id/textView11"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="Equipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView12"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:layout_alignTop="@+id/switch_1"
+        android:layout_toEndOf="@+id/textView6" />
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:id="@+id/View_GenerarEquipo"
+        android:layout_height="200dp"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/switch_1"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="Generar Equipos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView16"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:layout_marginStart="123dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Numero de Integrantes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView15"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/textView16"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="41dp" />
+
+        <EditText
+            android:ems="10"
+            android:id="@+id/txt_NumInte"
+            android:layout_height="35dp"
+            android:layout_width="70dp"
+            android:inputType="number"
+            android:layout_marginStart="40dp"
+            android:background="@android:color/background_light"
+            android:layout_alignBottom="@+id/textView15"
+            android:layout_toEndOf="@+id/textView15" />
+
+    </RelativeLayout>
+
+    <Button
+        android:text="Crear"
+        android:layout_width="300px"
+        android:id="@+id/button5"
+        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
+        android:theme="@style/TemaBoton"
+        android:textSize="18sp"
+        android:layout_height="100px"
+        android:layout_below="@+id/View_GenerarEquipo"
+        android:layout_centerHorizontal="true"
+        android:onClick="CrearTarea" />
+</RelativeLayout>
